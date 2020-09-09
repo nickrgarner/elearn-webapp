@@ -16,13 +16,18 @@
 </p>
 
 <p>
+  <strong>Phone number:</strong>
+  <%= @profile.phone_number %>
+</p>
+
+<p>
   <strong>Address:</strong>
   <%= @profile.address %>
 </p>
 
 <p>
-  <strong>Phone number:</strong>
-  <%= @profile.phone_number %>
+  <strong>User type:</strong>
+  <%= @profile.user_type %>
 </p>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |

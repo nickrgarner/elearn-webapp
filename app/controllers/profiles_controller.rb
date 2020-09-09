@@ -28,8 +28,8 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: @profile }
+        format.html { redirect_to login_path, notice: 'Profile was successfully created.' }
+        format.json { render :show, status: :created, location: login_path}
       else
         format.html { render :new }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
@@ -69,6 +69,6 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:first_name, :last_name, :email, :address, :phone_number, :password, :password_confirmation)
+      params.require(:profile).permit(:first_name, :last_name, :email, :phone_number, :address, :password, :password_confirmation, :user_type)
     end
 end

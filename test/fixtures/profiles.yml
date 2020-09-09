@@ -4,14 +4,16 @@ one:
   first_name: MyString
   last_name: MyString
   email: MyString
-  address: MyString
   phone_number: MyString
+  address: MyText
   password_digest: <%= BCrypt::Password.create('secret') %>
+  user_type: MyString
 
 two:
   first_name: MyString
   last_name: MyString
   email: MyString
-  address: MyString
   phone_number: MyString
+  address: MyText
   password_digest: <%= BCrypt::Password.create('secret') %>
+  user_type: MyString

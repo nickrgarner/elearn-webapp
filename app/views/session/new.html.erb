@@ -1,2 +1,23 @@
-<h1>Session#new</h1>
-<p>Find me in app/views/session/new.html.erb</p>
+<h1>Welcome to E-Learn!</h1>
+
+<p id="alert"><%= alert %></p>
+
+<h2>Login</h2>
+<%= form_tag session_index_path do |form| %>
+  <div class="field">
+    <%= label_tag :email %>
+    <%= text_field_tag :email %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Login" %>
+  </div>
+<% end %>
+
+
+<p>This file is view/session/new and can be our home page where the login and signup links are found.</p>
+
+<%= link_to "Sign Up", signup_path %> 

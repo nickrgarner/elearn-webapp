@@ -1,2 +1,8 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<h1>Home Page</h1>
+
+<p id="notice" ><%= notice %></p>
+
+<p>This is a static homepage for now, we can fix the redirect to happen somewhere else based on user.</p>
+
+ Logged in as <%= current_user.email %>.
+ <%= link_to "Log Out", logout_path %>
