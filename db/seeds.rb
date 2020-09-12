@@ -11,4 +11,11 @@ Discipline.create(name: "CE")
 Discipline.create(name: "EE")
 Discipline.create(name: "MAE")
 
-#Admin.create(user.first_name: "admin", user.last_name: "GGM", user.email: "admin@GGM.edu", user.phone_number: 999, user.address: "internet", user.password: ,user.user_type: "admin")
+s = Student.create(discipline_id: 1)
+Profile.create(first_name: "student", last_name: "GGM", email: "student@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s.id, userable_type: "Student")
+
+a = Admin.create()
+Profile.create(first_name: "admin", last_name: "GGM", email: "admin@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: a.id, userable_type: "Admin")
+
+t = Teacher.create(discipline_id: 1)
+Profile.create(first_name: "teacher", last_name: "GGM", email: "teacher@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t.id, userable_type: "Teacher")
