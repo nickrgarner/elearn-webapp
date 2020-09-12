@@ -3,9 +3,9 @@ class SessionController < ApplicationController
   end
 
   def create
-  	user = Profile.find_by_email(params[:email])
-  	if user && user.authenticate(params[:password])
-  			session[:user_id] = user.id
+  	person = Profile.find_by_email(params[:email])
+  	if person && person.authenticate(params[:password])
+  			session[:person_id] = person.id
   			redirect_to home_path, notice: "Logged In!"
   		else
   			flash.now[:alert] = "Email or password invalid"
@@ -15,7 +15,7 @@ class SessionController < ApplicationController
 
 
   def destroy
-  	session[:user_id] = nil
+  	session[:person_id] = nil
   	redirect_to root_url, notice: "Logged Out"
   end
 end

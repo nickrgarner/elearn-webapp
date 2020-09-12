@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
-    if session[:user_id]
-      @current_user ||= Profile.find(session[:user_id])
+    if session[:person_id]
+      @current_user ||= Profile.find(session[:person_id])
     else
       @current_user = nil
     end

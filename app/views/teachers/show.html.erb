@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <b>Discipline:</b>
+  <%= Discipline.find(@teacher.discipline_id).name %>
+</p>
+
 <%= link_to 'Edit', edit_teacher_path(@teacher) %> |
 <%= link_to 'Back', teachers_path %>

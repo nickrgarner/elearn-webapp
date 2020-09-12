@@ -4,16 +4,18 @@ Rails.application.routes.draw do
   end
   resources :disciplines
   resources :profiles
-  resources :purchase_histories
-  resources :feedbacks
+  resources :admins
   resources :students do
     resources :carts
   end
   resources :teachers
+
+  resources :purchase_histories
+  resources :feedbacks
   resources :credit_cards
   resources :session, only: [:new, :create, :destroy]
 
-  root 'session#new'
+  #root 'session#new'
   
   get 'pages/index'
 
@@ -22,5 +24,6 @@ Rails.application.routes.draw do
   get 'login', to: 'session#create', as: 'login'
   get 'logout', to: 'session#destroy', as: 'logout'
 
+  root 'pages#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
