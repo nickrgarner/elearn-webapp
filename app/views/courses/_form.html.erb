@@ -12,13 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :coursenumber %>
-    <%= form.number_field :coursenumber, id: :course_coursenumber %>
+    <%= form.label :course_number %>
+    <%= form.number_field :course_number, id: :course_course_number %>
   </div>
 
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :course_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :discipline_id %>
+    <%= select("course", "discipline_id", Discipline.all.collect{ |d| [ d.name, d.id] }) %>
   </div>
 
   <div class="field">

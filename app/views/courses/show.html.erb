@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Coursenumber:</strong>
-  <%= @course.coursenumber %>
+  <strong>Course Number:</strong>
+  <%= @course.course_number %>
 </p>
 
 <p>
   <strong>Name:</strong>
   <%= @course.name %>
+</p>
+
+<p>
+  <b>Discipline:</b>
+  <%= Discipline.find(@course.discipline_id).name %>
 </p>
 
 <p>

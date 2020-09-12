@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  resources :course_sections
-  resources :courses
+  resources :courses do
+    resources :course_sections
+  end
   resources :disciplines
   resources :profiles
   resources :purchase_histories
   resources :feedbacks
-  resources :students
+  resources :students do
+    resources :carts
+  end
   resources :teachers
-  resources :carts
   resources :credit_cards
   resources :session, only: [:new, :create, :destroy]
 

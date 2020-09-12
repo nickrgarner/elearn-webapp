@@ -1,4 +1,6 @@
 class Discipline < ApplicationRecord
-  has_many :teachers
-  has_many :courses
+  validates :name, presence: true
+  has_many :student
+  has_many :teacher
+  has_many :course
 end

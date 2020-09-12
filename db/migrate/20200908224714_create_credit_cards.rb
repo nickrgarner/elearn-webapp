@@ -5,7 +5,7 @@ class CreateCreditCards < ActiveRecord::Migration[5.1]
       t.integer :card_number
       t.date :expiration_date
       t.integer :cvv
-
+      t.references :student
       t.timestamps
     end
   end

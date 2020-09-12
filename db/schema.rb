@@ -10,11 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200909140322) do
+ActiveRecord::Schema.define(version: 20200912001231) do
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "course_sections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.integer "course_number"
+    t.string "name"
+    t.string "area"
+    t.float "price"
+    t.integer "discipline_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discipline_id"], name: "index_courses_on_discipline_id"
   end
 
   create_table "credit_cards", force: :cascade do |t|
@@ -26,13 +42,14 @@ ActiveRecord::Schema.define(version: 20200909140322) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "feedbacks", force: :cascade do |t|
-    t.string "description"
+  create_table "disciplines", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "pages", force: :cascade do |t|
+  create_table "feedbacks", force: :cascade do |t|
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

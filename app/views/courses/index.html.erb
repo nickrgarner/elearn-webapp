@@ -5,7 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Coursenumber</th>
+      <th>Course Number</th>
+      <th>Discipline</th>
       <th>Name</th>
       <th>Area</th>
       <th>Price</th>
@@ -16,7 +17,8 @@
   <tbody>
     <% @courses.each do |course| %>
       <tr>
-        <td><%= course.coursenumber %></td>
+        <td><%= course.course_number %></td>
+        <td><%= course.discipline.name %></td>
         <td><%= course.name %></td>
         <td><%= course.area %></td>
         <td><%= course.price %></td>
@@ -31,3 +33,4 @@
 <br>
 
 <%= link_to 'New Course', new_course_path %>
+<%= link_to 'Home',  home_path%>
