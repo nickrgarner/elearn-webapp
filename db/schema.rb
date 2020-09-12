@@ -80,12 +80,12 @@ ActiveRecord::Schema.define(version: 20200912135257) do
     t.string "phone_number"
     t.text "address"
     t.string "password_digest"
-    t.string "user_type"
-    t.integer "user_id"
+    t.string "userable_type"
+    t.integer "userable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_profiles_on_email", unique: true
-    t.index ["user_id"], name: "index_profiles_on_user_id"
+    t.index ["userable_type", "userable_id"], name: "index_profiles_on_userable_type_and_userable_id"
   end
 
   create_table "purchase_histories", force: :cascade do |t|

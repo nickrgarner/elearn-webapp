@@ -11,6 +11,8 @@
     </div>
   <% end %>
 
+  <%= render './profiles/profileform', form: form %>
+  
   <div class="field">
     <%= form.label :discipline_id %>
     <%= select("teacher", "discipline_id", Discipline.all.collect{ |d| [ d.name, d.id] }) %>

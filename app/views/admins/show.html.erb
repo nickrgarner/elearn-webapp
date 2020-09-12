@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<%= render './profiles/profileshow', userable: @admin%>
+
 <%= link_to 'Edit', edit_admin_path(@admin) %> |
 <%= link_to 'Back', admins_path %>

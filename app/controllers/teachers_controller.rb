@@ -15,6 +15,7 @@ class TeachersController < ApplicationController
   # GET /teachers/new
   def new
     @teacher = Teacher.new
+    @teacher.profile = Profile.new
   end
 
   # GET /teachers/1/edit
@@ -69,6 +70,6 @@ class TeachersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def teacher_params
-      params.require(:teacher).permit(:discipline_id)
+      params.require(:teacher).permit(:discipline_id, profile_attributes: [:first_name, :last_name, :email, :phone_number, :address, :password, :password_confirmation])
     end
 end

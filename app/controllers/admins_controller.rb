@@ -15,6 +15,7 @@ class AdminsController < ApplicationController
   # GET /admins/new
   def new
     @admin = Admin.new
+    @admin.profile = Profile.new
   end
 
   # GET /admins/1/edit
@@ -69,6 +70,6 @@ class AdminsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.fetch(:admin, {})
+      params.require(:admin).permit(profile_attributes: [:first_name, :last_name, :email, :phone_number, :address, :password, :password_confirmation])
     end
 end

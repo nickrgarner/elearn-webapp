@@ -7,8 +7,7 @@ class CreateProfiles < ActiveRecord::Migration[5.1]
       t.string :phone_number
       t.text :address
       t.string :password_digest
-      t.string :user_type
-      t.references :user, , polymorphic: true
+      t.references :userable, polymorphic: true
       t.timestamps
     end
     add_index :profiles, :email, unique: true

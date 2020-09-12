@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    @student.profile = Profile.new
   end
 
   # GET /students/1/edit
@@ -69,6 +70,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:discipline_id)
+      params.require(:student).permit(:discipline_id, profile_attributes: [:first_name, :last_name, :email, :phone_number, :address, :password, :password_confirmation])
     end
 end

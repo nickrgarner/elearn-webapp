@@ -5,6 +5,11 @@
 <table>
   <thead>
     <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Phone number</th>
+      <th>Address</th>
       <th>Major</th>
       <th colspan="3"></th>
     </tr>
@@ -13,7 +18,12 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
-        <td><%= student.discipline.name %></td>
+        <td><%= student.profile.first_name %></td>
+        <td><%= student.profile.last_name %></td>
+        <td><%= student.profile.email %></td>
+        <td><%= student.profile.phone_number %></td>
+        <td><%= student.profile.address %></td>
+        <td><%= student.profile.discipline.name %></td>
         <td><%= link_to 'Show', student %></td>
         <td><%= link_to 'Edit', edit_student_path(student) %></td>
         <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>

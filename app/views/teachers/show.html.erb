@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= render './profiles/profileshow', userable: @teacher %>
+
 <p>
   <b>Discipline:</b>
   <%= Discipline.find(@teacher.discipline_id).name %>
