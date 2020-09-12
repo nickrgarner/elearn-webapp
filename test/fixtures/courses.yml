@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coursenumber: 1
+  name: MyString
+  area: MyString
+  price: 1.5
+
+two:
+  coursenumber: 1
+  name: MyString
+  area: MyString
+  price: 1.5

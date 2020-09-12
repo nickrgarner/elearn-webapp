@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :course_sections
+  resources :courses
+  resources :disciplines
   resources :purchase_histories
   resources :feedbacks
   resources :students
