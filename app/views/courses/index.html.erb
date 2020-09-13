@@ -24,6 +24,8 @@
         <td><%= course.price %></td>
         <td><%= link_to 'Show', course %></td>
         <td><%= link_to 'Edit', edit_course_path(course) %></td>
+        <td><%= link_to 'Create Course Section', new_course_course_section_path(course) %></td>
+        <td><%= link_to 'View Course Sections', course_course_sections_path(course) %></td>
         <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

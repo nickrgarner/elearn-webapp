@@ -6,5 +6,10 @@ class Profile < ApplicationRecord
     validates :last_name, presence: true
     validates :phone_number, presence: true
     validates :address, presence: true
+
+    def name
+      [first_name,last_name].join(' ')
+    end
   end
+
   

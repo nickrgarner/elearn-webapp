@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :disciplines
   resources :credit_cards
   resources :courses do
-    resources :course_sections
+    resources :course_sections, only: [:new, :create, :index]
   end
   resources :admins
 

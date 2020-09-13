@@ -1,4 +1,4 @@
-<%= form_with(model: course_section, local: true) do |form| %>
+<%= form_with(model: [@course, @course.course_sections.build], local: true) do |form| %>
   <% if course_section.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(course_section.errors.count, "error") %> prohibited this course_section from being saved:</h2>
@@ -10,6 +10,17 @@
       </ul>
     </div>
   <% end %>
+
+<p>
+  <strong>Course</strong>
+  <br>
+  <%= @course.name %>
+</p>
+
+  <div class="field">
+    <%= form.label :teacher_id %>
+    <%= form.select("teacher_id", Teacher.all.collect{ |t| [ t.profile.name, t.id] }) %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
