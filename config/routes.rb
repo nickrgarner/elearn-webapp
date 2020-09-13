@@ -3,7 +3,6 @@ Rails.application.routes.draw do
     resources :course_sections
   end
   resources :disciplines
-  #resources :profiles
   resources :admins 
   resources :students do
     resources :carts
