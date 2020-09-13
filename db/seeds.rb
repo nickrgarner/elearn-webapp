@@ -19,3 +19,7 @@ Profile.create(first_name: "admin", last_name: "GGM", email: "admin@GGM.edu", ph
 
 t = Teacher.create(discipline_id: 1)
 Profile.create(first_name: "teacher", last_name: "GGM", email: "teacher@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t.id, userable_type: "Teacher")
+
+Courses.create(course_number: 517, name: OODD, discipline_id: 1, area: "Software Development", price: 999)
+
+CourseSection.create()
