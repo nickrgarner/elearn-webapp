@@ -4,9 +4,9 @@
       <h2><%= pluralize(purchase_history.errors.count, "error") %> prohibited this purchase_history from being saved:</h2>
 
       <ul>
-      <% purchase_history.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% purchase_history.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>

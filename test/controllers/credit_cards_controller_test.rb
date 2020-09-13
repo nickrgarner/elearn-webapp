@@ -17,7 +17,7 @@ class CreditCardsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create credit_card" do
     assert_difference('CreditCard.count') do
-      post credit_cards_url, params: { credit_card: { card_number: @credit_card.card_number, cvv: @credit_card.cvv, expiration_date: @credit_card.expiration_date, name: @credit_card.name } }
+      post credit_cards_url, params: { credit_card: {  } }
     end
 
     assert_redirected_to credit_card_url(CreditCard.last)
@@ -34,7 +34,7 @@ class CreditCardsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update credit_card" do
-    patch credit_card_url(@credit_card), params: { credit_card: { card_number: @credit_card.card_number, cvv: @credit_card.cvv, expiration_date: @credit_card.expiration_date, name: @credit_card.name } }
+    patch credit_card_url(@credit_card), params: { credit_card: {  } }
     assert_redirected_to credit_card_url(@credit_card)
   end
 
