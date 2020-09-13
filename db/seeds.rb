@@ -17,8 +17,11 @@ Profile.create(first_name: "student", last_name: "GGM", email: "student@GGM.edu"
 a = Admin.create()
 Profile.create(first_name: "admin", last_name: "GGM", email: "admin@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: a.id, userable_type: "Admin")
 
-t = Teacher.create(discipline_id: 1)
-Profile.create(first_name: "teacher", last_name: "GGM", email: "teacher@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t.id, userable_type: "Teacher")
+t1 = Teacher.create(discipline_id: 1)
+Profile.create(first_name: "teacher1", last_name: "GGM", email: "teacher1@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t1.id, userable_type: "Teacher")
+
+t2 = Teacher.create(discipline_id: 2)
+Profile.create(first_name: "teacher2", last_name: "GGM", email: "teacher2@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t2.id, userable_type: "Teacher")
 
 Course.create(course_number: 517, name: "OODD", discipline_id: 1, area: "Software Development", price: 999)
 
