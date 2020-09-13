@@ -23,9 +23,8 @@
 
   <div class="field">
     <%= form.label :expiration_date %>
-    <%= form.month_field :expiration_date, id: :credit_card_expiration_date %>
+    <%= form.month_field :expiration_date, min: Date.today.beginning_of_month %>
   </div>
-  Need to add validation
 
   <div class="field">
     <%= form.label :cvv %>
