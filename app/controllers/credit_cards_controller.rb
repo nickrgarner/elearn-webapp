@@ -27,9 +27,9 @@ class CreditCardsController < ApplicationController
   # POST /credit_cards.json
   def create
     @student = Student.find(params[:student_id])
+    params[:credit_card][:expiration_date] = "#{params[:credit_card][:expiration_date]}-01".to_date
     @credit_card = CreditCard.new(credit_card_params)
     @credit_card.student = @student
-    
     respond_to do |format|
       if @credit_card.save
         format.html { redirect_to @student, notice: 'Credit card was successfully created.' }
@@ -44,6 +44,8 @@ class CreditCardsController < ApplicationController
   # PATCH/PUT /credit_cards/1
   # PATCH/PUT /credit_cards/1.json
   def update
+    params[:credit_card][:expiration_date] = "#{params[:credit_card][:expiration_date]}-01".to_date
+    puts params
     respond_to do |format|
       if @credit_card.update(credit_card_params)
         format.html { redirect_to @student, notice: 'Credit card was successfully updated.' }
