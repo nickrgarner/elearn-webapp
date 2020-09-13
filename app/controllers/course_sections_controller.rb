@@ -1,6 +1,5 @@
 class CourseSectionsController < ApplicationController
-  before_action :set_course_section, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /course_sections
   # GET /course_sections.json
   def index
@@ -17,6 +16,8 @@ class CourseSectionsController < ApplicationController
   # POST /course_sections
   # POST /course_sections.json
   def create
+    puts "debug"
+    puts params
     @course = Course.find(params[:course_id])
     @course_section =  @course.course_sections.create(course_section_params)
 
@@ -32,11 +33,6 @@ class CourseSectionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course_section
-      @course_section = CourseSection.find(params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
     def course_section_params
       params.require(:course_section).permit(:course_id, :teacher_id)

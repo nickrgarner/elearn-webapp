@@ -20,16 +20,16 @@
         <td><%= credit_card.card_number %></td>
         <td><%= credit_card.expiration_date %></td>
         <td><%= credit_card.cvv %></td>
-        <td><%= link_to 'Show', credit_card %></td>
-        <td><%= link_to 'Edit', edit_credit_card_path(credit_card) %></td>
-        <td><%= link_to 'Destroy', credit_card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', student_credit_card_path(credit_card) %></td>
+        <%# <td><%= link_to 'Edit', edit_student_credit_card_path(credit_card) %></td>
+        <%# <td><%= link_to 'Destroy', credit_card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Credit Card', new_credit_card_path %>
-<%= link_to 'Back',  students_path%>
+<%# <%= if @credit_cards.is_nil?%>
+<%= link_to 'New Credit Card', new_student_credit_card_path %> |
+<%= link_to 'Back',  student_path(@student)%> |
 <%= link_to 'Home',  home_path%>

@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   resources :teachers
   resources :students do
     resources :carts
+    resources :credit_cards, only: [:new, :create, :destroy, :edit, :show, :update]
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :purchase_histories
   resources :feedbacks
   resources :disciplines
-  resources :credit_cards
   resources :courses do
     resources :course_sections, only: [:new, :create, :index]
   end
