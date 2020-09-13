@@ -26,3 +26,5 @@ Profile.create(first_name: "teacher2", last_name: "GGM", email: "teacher2@GGM.ed
 Course.create(course_number: 517, name: "OODD", discipline_id: 1, area: "Software Development", price: 999)
 
 CourseSection.create(course_id: 1, teacher_id: 1)
+
+CreditCard.create(name: "student", card_number: 1234567812345678, expiration_date: "2020-09-13", cvv: 123, student_id: 1)
