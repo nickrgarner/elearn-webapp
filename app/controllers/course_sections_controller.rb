@@ -1,5 +1,4 @@
 class CourseSectionsController < ApplicationController
-  
   # GET /course_sections
   # GET /course_sections.json
   def index
