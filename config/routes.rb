@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#teachers', constraints: UserConstraints.new("Teacher")
   get 'home', to: 'pages#students',constraints: UserConstraints.new("Student")
   get 'signup', to:'students#new', as: 'signup'
-  get 'login', to: 'sessions#create', as: 'login'
+  get 'login', to: 'sessions#login', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   match "*path", to: "application#index", via: :all

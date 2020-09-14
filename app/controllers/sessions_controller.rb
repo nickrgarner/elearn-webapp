@@ -3,6 +3,14 @@ class SessionsController < ApplicationController
 
     def new
     end
+
+    def login
+      if logged_in?
+        redirect_to home_path
+      else
+        redirect_to create_session_path
+      end 
+    end
   
     def create
         user = Profile.find_by_email(params[:email])
