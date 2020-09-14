@@ -1,0 +1,9 @@
+<h1> Welcome to Your Teacher Home Page <%=current_user.first_name%>!</h1>
+
+<p id="notice" ><%= notice %></p>
+
+<p>This is a static teacher homepage for now. The links can be dependent on the student_id as to where it re-directs.</p>
+
+<%= link_to "Courses", courses_path %> 
+ Logged in as <%= current_user.email %>.
+ <%= link_to "Log Out", logout_path %>
