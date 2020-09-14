@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   resources :admins
 
   root 'sessions#new'
-
   get 'home', to: 'pages#admin' ,constraints: UserConstraints.new("Admin")
   get 'home', to: 'pages#teachers', constraints: UserConstraints.new("Teacher")
   get 'home', to: 'pages#students',constraints: UserConstraints.new("Student")
