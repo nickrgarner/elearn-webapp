@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :course_sections, only: [:new, :create, :index]
   end
   resources :admins
+  resources :user_constraints
+  resources :application
 
   root 'sessions#new'
   get 'home', to: 'pages#admin' ,constraints: UserConstraints.new("Admin")
@@ -20,6 +22,8 @@ Rails.application.routes.draw do
   get 'signup', to:'students#new', as: 'signup'
   get 'login', to: 'sessions#create', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
+
+  match "*path", to: "application#index", via: :all
 
   #root 'pages#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

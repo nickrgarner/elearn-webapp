@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
     helper_method :current_user
     helper_method :logged_in?
     helper_method :admin?
-  
+  	
+  	def index
+  		flash[:notice] = "Sorry that page was not found."
+  		redirect_to home_path
+  	end
     def current_user
       if session[:user_id]
         @current_user ||= Profile.find(session[:user_id])

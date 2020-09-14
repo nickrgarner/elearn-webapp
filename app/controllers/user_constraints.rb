@@ -5,7 +5,9 @@ class UserConstraints < ApplicationController
 	end
 
 	def matches?(request)
-		@user_type == current_user(request).userable_type.to_str
+		# if !current_user(request).nil? # this is a patch to typing /home in address by while not logged in
+	    @user_type == current_user(request).userable_type.to_str
+	rescue
 	end
 
 	def current_user(request)
