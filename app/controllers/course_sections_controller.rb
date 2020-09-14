@@ -2,6 +2,7 @@ class CourseSectionsController < ApplicationController
   # GET /course_sections
   # GET /course_sections.json
   before_action :admin?, only: [:new,:create]
+  before_action :teacher?, only: [:register]
 
   def index
     @course = Course.find(params[:course_id])
@@ -12,16 +13,18 @@ class CourseSectionsController < ApplicationController
   def new
     @course = Course.find(params[:course_id])
     @course_section = @course.course_sections.build
+    if(current_user.userable_type.to_str == "Teacher")
+      @course_section.teacher_id = current_user.userable.id
+    end
   end
 
   # POST /course_sections
   # POST /course_sections.json
   def create
-    puts "debug"
-    puts params
     @course = Course.find(params[:course_id])
     @course_section =  @course.course_sections.create(course_section_params)
-
+    @course_section.teacher_id = current_user.userable.id
+    
     respond_to do |format|
       if @course_section.save
         format.html { redirect_to @course, notice: 'Course section was successfully created.' }
@@ -29,6 +32,24 @@ class CourseSectionsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @course_section.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # POST /course_sections/register
+  # POST /course_sections/register.json
+  def register
+    @course = Course.find(params[:course_id])
+    @course_section =  @course.course_sections.create()
+    @course_section.teacher_id = current_user.userable.id
+    
+    respond_to do |format|
+      if @course_section.save
+        format.html { redirect_to @course, notice: 'Course section was registerd created.' }
+        format.json { render :index, status: :created, location: @course }
+      else
+        format.html { redirect_to @course, notice: 'Course cannot be registerd .' }
+        format.json { render :index, status: :created, location: @course }
       end
     end
   end

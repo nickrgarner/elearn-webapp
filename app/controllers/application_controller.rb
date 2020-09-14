@@ -31,5 +31,10 @@ class ApplicationController < ActionController::Base
     	redirect_to home_path unless current_user.userable_type.to_str == "Admin"
     end
 
+    def teacher?
+    	flash[:notice] = "Page Restricted"
+    	redirect_to home_path unless current_user.userable_type.to_str == "Teacher"
+    end
+
   end
   
