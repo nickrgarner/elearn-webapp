@@ -12,7 +12,7 @@
 
 <p>
   <strong>Expiration date:</strong>
-  <%= @credit_card.expiration_date %>
+  <%= @credit_card.expiration_date.strftime("%m/%Y") %>
 </p>
 
 <p>
