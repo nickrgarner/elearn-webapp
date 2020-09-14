@@ -9,5 +9,6 @@
 <%= link_to "Teachers", teachers_path %> 
 <%= link_to "Disciplines", disciplines_path %> 
 <%= link_to "Courses", courses_path %> 
+<%= link_to "Edit Profile", edit_admin_path(current_user.userable.id)%>
  Logged in as <%= current_user.email %>.
  <%= link_to "Log Out", logout_path %>
