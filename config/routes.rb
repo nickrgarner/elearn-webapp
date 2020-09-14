@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :teachers
+  resources :credit_cards, only: [:new, :create, :destroy, :edit, :show, :update]
   resources :students do
     resources :carts
-    resources :credit_cards, only: [:new, :create, :destroy, :edit, :show, :update]
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :purchase_histories
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :user_constraints
   resources :application
 
-  root 'sessions#new'
+  root 'sessions#login'
   get 'home', to: 'pages#admin' ,constraints: UserConstraints.new("Admin")
   get 'home', to: 'pages#teachers', constraints: UserConstraints.new("Teacher")
   get 'home', to: 'pages#students',constraints: UserConstraints.new("Student")

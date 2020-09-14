@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorized, only: [:new, :create]
+    skip_before_action :authorized, only: [:new, :create, :login]
 
     def new
     end
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       if logged_in?
         redirect_to home_path
       else
-        redirect_to create_session_path
+        redirect_to new_session_path
       end 
     end
   
