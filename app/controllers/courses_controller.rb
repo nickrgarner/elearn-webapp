@@ -4,7 +4,11 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    if current_user.userable_type.to_str == "Teacher" || current_user.userable_type.to_str == "Student"
+      @courses = Course.where(discipline_id: current_user.userable.discipline_id)
+    else
+      @courses = Course.all
+    end
   end
 
   # GET /courses/1
