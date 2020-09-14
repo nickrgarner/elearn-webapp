@@ -11,8 +11,11 @@ Discipline.create(name: "CE")
 Discipline.create(name: "EE")
 Discipline.create(name: "MAE")
 
-s = Student.create(discipline_id: 1)
-Profile.create(first_name: "student", last_name: "GGM", email: "student@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s.id, userable_type: "Student")
+s1 = Student.create(discipline_id: 1)
+Profile.create(first_name: "student1", last_name: "GGM", email: "student@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s1.id, userable_type: "Student")
+
+s2 = Student.create(discipline_id: 2)
+Profile.create(first_name: "student1", last_name: "GGM", email: "student@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s2.id, userable_type: "Student")
 
 a = Admin.create()
 Profile.create(first_name: "admin", last_name: "GGM", email: "admin@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: a.id, userable_type: "Admin")
@@ -24,6 +27,9 @@ t2 = Teacher.create(discipline_id: 2)
 Profile.create(first_name: "teacher2", last_name: "GGM", email: "teacher2@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t2.id, userable_type: "Teacher")
 
 Course.create(course_number: 517, name: "OODD", discipline_id: 1, area: "Software Development", price: 999)
+Course.create(course_number: 563, name: "Micro Architecture", discipline_id: 2, area: "Computer Architecture", price: 999)
+Course.create(course_number: 560, name: "Embedded Systems Architecture", discipline_id: 2, area: "Embedded Systems", price: 999)
+Course.create(course_number: 566, name: "Compilers", discipline_id: 2, area: "Software Development", price: 999)
 
 CourseSection.create(course_id: 1, teacher_id: 1)
 

@@ -19,7 +19,11 @@
 
   <div class="field">
     <%= form.label :teacher_id %>
-    <%= form.select("teacher_id", Teacher.where(discipline_id: @course.discipline_id).collect{ |t| [ t.profile.name, t.id] }) %>
+    <% if current_user.userable_type.to_str == "Admin" %> 
+      <%= form.select("teacher_id", Teacher.where(discipline_id: @course.discipline_id).collect{ |t| [ t.profile.name, t.id] }) %>
+    <% elsif current_user.userable_type.to_str == "Teacher" %>
+      <%= current_user.name %>
+    <% end %> 
   </div>
 
   <div class="actions">
