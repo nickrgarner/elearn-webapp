@@ -27,6 +27,7 @@
 <br>
 <% if current_user.userable_type.to_s == "Admin"%>
   <%= link_to 'Create Course Section', new_course_course_section_path %> |
-<%end%>
+<% end %>
 <%= link_to 'View Course', course_path(@course) %> |
-<%= link_to 'View Courses', courses_path %>
+<%= link_to 'View Courses', courses_path %> |
+<%= link_to 'Home', home_path %>

@@ -2,5 +2,8 @@
 
 <%= render 'form', student: @student %>
 
-<%= link_to 'Show', @student %> |
-<%= link_to 'Back', home_path %>
+<%= link_to 'Show Profile', @student %> |
+<% if current_user.userable_type.to_s == "Admin"%>
+    <%= link_to 'View Students', students_path %> |
+<% end %>
+<%= link_to 'Home', home_path %>

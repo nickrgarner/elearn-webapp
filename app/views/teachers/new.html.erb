@@ -2,4 +2,7 @@
 
 <%= render 'form', teacher: @teacher %>
 
-<%= link_to 'Back', teachers_path %>
+<% if current_user.userable_type.to_s == "Admin"%>
+    <%= link_to 'View Teachers', teachers_path %> |
+<% end %>
+<%= link_to 'Home', home_path %>

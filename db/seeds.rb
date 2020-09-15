@@ -12,10 +12,10 @@ Discipline.create(name: "EE")
 Discipline.create(name: "MAE")
 
 s1 = Student.create(discipline_id: 1)
-Profile.create(first_name: "student1", last_name: "GGM", email: "student@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s1.id, userable_type: "Student")
+Profile.create(first_name: "student1", last_name: "GGM", email: "student1@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s1.id, userable_type: "Student")
 
 s2 = Student.create(discipline_id: 2)
-Profile.create(first_name: "student1", last_name: "GGM", email: "student@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s2.id, userable_type: "Student")
+Profile.create(first_name: "student2", last_name: "GGM", email: "student2@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s2.id, userable_type: "Student")
 
 a = Admin.create()
 Profile.create(first_name: "admin", last_name: "GGM", email: "admin@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: a.id, userable_type: "Admin")

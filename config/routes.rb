@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :teachers
-  resources :credit_cards, only: [:new, :create, :destroy, :edit, :show, :update]
   resources :students do
+    resources :credit_cards, only: [:new, :create, :destroy, :edit, :show, :update]
     resources :carts
   end
   resources :sessions, only: [:new, :create, :destroy]
