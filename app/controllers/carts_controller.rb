@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy, :addtocart, :removefromcart]
 
   # GET /carts
   # GET /carts.json
@@ -62,23 +62,28 @@ class CartsController < ApplicationController
   # end
 
   def addtocart
-    @course_section = params[:course_section]
-    CartObject.create(:cart_id => @cart[:id], :course_section_id => @course_section)
+    @course_section = CourseSection.find(params[:course_section])
+    @cart.cart_objects.create(:cart_id => @cart[:id], :course_section_id => @course_section)
   end
 
   def removefromcart
-    @course_section = params[:course_section]
-    CartObject.destroy( CartObject.where(:cart_id => @cart[:id], :course_section_id => @course_section))
+    @course_section = CourseSection.find(params[:course_section])
+    @cart.cart_objects.where(:cart_id => @cart[:id], :course_section_id => @course_section).destroy
+    # CartObject.destroy( CartObject.where(:cart_id => @cart[:id], :course_section_id => @course_section))
+  end
+
+  def checkout
+
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
-      @cart = Cart.find(params[:id])
+      @cart = Cart.find(id: current_user.userable.cart.id)
     end
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      params.fetch(:cart, {})
+      params.require(:course_section)
     end
 end
