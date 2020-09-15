@@ -1,6 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-  before_action :teacher_edit_access?, only: [:edit, :update, :show]
+  before_action :teacher_edit_access?, only: [:edit, :update]
   before_action :teacher_show_access?, only: [:show]
   before_action :teacher_index_access?, only: [:index]
   before_action :admin?, only: [:new, :create, :destroy]
