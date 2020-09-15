@@ -30,6 +30,7 @@ c1 = Course.create(course_number: 517, name: "OODD", discipline_id: 1, area: "So
 c2 = Course.create(course_number: 563, name: "Micro Architecture", discipline_id: 2, area: "Computer Architecture", price: 999)
 c3 = Course.create(course_number: 560, name: "Embedded Systems Architecture", discipline_id: 2, area: "Embedded Systems", price: 999)
 c4 = Course.create(course_number: 566, name: "Compilers", discipline_id: 2, area: "Software Development", price: 999)
+c5 = Course.create(course_number: 550, name: "Fluid Mechanics", discipline_id: 4, area: "Software Development", price: 999)
 
 cs1 = CourseSection.create(course_id: c1.id, teacher_id: t1.id)
 cs2 = CourseSection.create(course_id: c2.id, teacher_id: t2.id)

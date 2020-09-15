@@ -1,7 +1,7 @@
 class CourseSectionsController < ApplicationController
   # GET /course_sections
   # GET /course_sections.json
-  before_action :admin?, only: [:new,:create]
+  before_action :admin?, only: [:new, :create]
   before_action :teacher?, only: [:register]
 
   def index
@@ -23,10 +23,12 @@ class CourseSectionsController < ApplicationController
   def create
     @course = Course.find(params[:course_id])
     @course_section =  @course.course_sections.new(course_section_params)
-    @course_section.teacher_id = current_user.userable.id
     
     respond_to do |format|
-      if @course_section.save
+      if CourseSection.where(teacher_id: @course_section.teacher_id).any?
+        format.html { render :new }
+        flash[:notice] = "Course section for teacher already exists."
+      elsif @course_section.save
         format.html { redirect_to @course, notice: 'Course section was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else

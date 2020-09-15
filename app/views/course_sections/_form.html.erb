@@ -17,6 +17,7 @@
   <%= @course.name %>
 </p>
 
+<% if Teacher.where(discipline_id: @course.discipline_id).any? %>
   <div class="field">
     <%= form.label :teacher_id %>
     <% if current_user.userable_type.to_str == "Admin" %> 
@@ -26,7 +27,11 @@
     <% end %> 
   </div>
 
+  
   <div class="actions">
     <%= form.submit %>
   </div>
+  <% else %>
+    No teacher exists
+  <% end %>
 <% end %>
