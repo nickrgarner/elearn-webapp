@@ -1,13 +1,6 @@
 class CreditCardsController < ApplicationController
   before_action :set_credit_card, only: [:show, :edit, :update, :destroy]
 
-  # GET /credit_cards
-  # GET /credit_cards.json
-  def index
-    @student = Student.find(params[:student_id])
-    @credit_cards = CreditCard.where(student_id: @student.id)
-  end
-
   # GET /credit_cards/1
   # GET /credit_cards/1.json
   def show

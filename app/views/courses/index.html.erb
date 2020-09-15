@@ -28,8 +28,11 @@
           <td><%= link_to 'Create Course Section', new_course_course_section_path(course) %></td>
           <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% elsif current_user.userable_type.to_s == "Teacher"%>
-          # Add check to see if already registered
-          <td><%= link_to 'Create Course Section', course_register_path(course), method: :post %></td>
+          <% if current_user.userable.course_sections.where(course_id: course.id) %>
+            <td>Registered</td>
+          <% else %>
+            <td><%= link_to 'Create Course Section', course_register_path(course), method: :post %></td>
+          <% end %>
         <% end %>
         <td><%= link_to 'View Course Sections', course_course_sections_path(course) %></td>
       </tr>
@@ -40,6 +43,6 @@
 <br>
 
 <% if current_user.userable_type.to_s == "Admin"%>
-  <%= link_to 'New Course', new_course_path %>
+  <%= link_to 'New Course', new_course_path %> |
 <% end %>
 <%= link_to 'Home',  home_path%>

@@ -28,6 +28,14 @@
 <% if current_user.userable_type.to_s == "Admin"%>
   <%= link_to 'Edit', edit_course_path(@course) %> |
   <%= link_to 'Create Course Section', new_course_course_section_path(@course) %> |
-<%end%>
-<td><%= link_to 'View Course Sections', course_course_sections_path(@course) %></td> |
-<%= link_to 'Back', courses_path %>
+<% end %>
+<% if current_user.userable_type.to_s == "Teacher"%>
+  <% if current_user.userable.course_sections.where(course_id: @course.id) %>
+    Registered |
+  <% else %>
+    <%= link_to 'Create Course Section', course_register_path(@course), method: :post %> |
+  <% end %>
+<% end %>
+<%= link_to 'View Course Sections', course_course_sections_path(@course) %> |
+<%= link_to 'View Courses', courses_path %> |
+<%= link_to 'Home', home_path %>
