@@ -85,6 +85,7 @@ class StudentsController < ApplicationController
           redirect_to home_path
         end
       elsif current_user.userable_type.to_str == "Teacher"
+        flash[:notice] = "Page Restricted"
         redirect_to home_path
       end
     end
@@ -99,7 +100,7 @@ class StudentsController < ApplicationController
     end
 
     def student_index_access?
-      if current_user.userable_type.to_str == "Student"
+      if current_user.userable_type.to_str != "Admin"
         flash[:notice] = "Page Restricted"
         redirect_to home_path
       end

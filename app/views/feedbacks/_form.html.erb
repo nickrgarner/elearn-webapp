@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :course_section_id %>
-    <%= form.select("course_section_id", CourseSection.collect{ |c| [ c.profile.name, c.id]}) %>
+    <%= form.select("course_section_id", CourseSection.collect{ |c| [ c.name, c.id]}) %>
   </div>
 
   <div class="field">

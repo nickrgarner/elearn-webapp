@@ -13,7 +13,7 @@
 <% if current_user.userable_type.to_str != "Teacher" %>
   <p>
     <strong>Teacher:</strong>
-    <%= @feedback.course.name %>
+    <%= @feedback.teacher.profile.name %>
   </p>
 <% end %>
 

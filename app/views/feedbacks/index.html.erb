@@ -21,7 +21,7 @@
       <td><%= feedback.course_section.course.course_number %></td>
       <td><%= feedback.course_section.course.name %></td>
       <% if current_user.userable_type.to_str != "Teacher" %>
-        <td><%= feedback.teacher.name %></td>
+        <td><%= feedback.teacher.profile.name %></td>
       <% end %>
         <td><%= feedback.description %></td>
         <td><%= link_to 'Show', feedback %></td>
