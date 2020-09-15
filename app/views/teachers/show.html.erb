@@ -9,6 +9,7 @@
 
 <% if current_user.userable_type.to_s == "Admin"%>
   <%= link_to 'Edit Profile', edit_teacher_path(@teacher) %> |
+<% if current_user.userable_type.to_s != "Teacher"%>
   <%= link_to 'View Teachers', teachers_path %> |
 <% end %>
 <%= link_to 'Home', home_path %>

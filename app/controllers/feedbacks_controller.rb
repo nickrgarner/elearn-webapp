@@ -4,7 +4,13 @@ class FeedbacksController < ApplicationController
   # GET /feedbacks
   # GET /feedbacks.json
   def index
-    @feedbacks = Feedback.all
+    if current_user.userable_type.to_str == "Admin"
+      @feedbacks = Feedback.all
+    elsif current_user.userable_type.to_str == "Student"
+      @feedbacks = Feedback.where(student_id: current_user.userable.id)
+    else current_user.userable_type.to_str == "Teacher"
+      @feedbacks = Feedback.where(teacher_id: current_user.userable.id)
+    end
   end
 
   # GET /feedbacks/1

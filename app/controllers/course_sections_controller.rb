@@ -22,7 +22,7 @@ class CourseSectionsController < ApplicationController
   # POST /course_sections.json
   def create
     @course = Course.find(params[:course_id])
-    @course_section =  @course.course_sections.create(course_section_params)
+    @course_section =  @course.course_sections.new(course_section_params)
     @course_section.teacher_id = current_user.userable.id
     
     respond_to do |format|
@@ -40,7 +40,7 @@ class CourseSectionsController < ApplicationController
   # POST /course_sections/register.json
   def register
     @course = Course.find(params[:course_id])
-    @course_section =  @course.course_sections.create()
+    @course_section =  @course.course_sections.new
     @course_section.teacher_id = current_user.userable.id
     
     respond_to do |format|

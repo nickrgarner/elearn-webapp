@@ -12,6 +12,16 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :course_section_id %>
+    <%= form.select("course_section_id", CourseSection.collect{ |c| [ c.profile.name, c.id]}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :teacher_id %>
+    <%= form.select("teacher_id", Teacher.collect{ |t| [ t.profile.name, t.id]}) %>
+  </div>
+
+  <div class="field">
     <%= form.label :description %>
     <%= form.text_field :description, id: :feedback_description %>
   </div>

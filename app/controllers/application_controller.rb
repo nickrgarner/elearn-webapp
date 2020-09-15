@@ -4,7 +4,9 @@ class ApplicationController < ActionController::Base
     helper_method :current_user
     helper_method :logged_in?
     helper_method :admin?
-  	
+    helper_method :teacher?
+    helper_method :student?
+
   	def index
   		flash[:notice] = "Sorry that page was not found."
   		redirect_to home_path
@@ -27,13 +29,24 @@ class ApplicationController < ActionController::Base
     end
 
     def admin?
-    	flash[:notice] = "Page Restricted"
+      if current_user.userable_type.to_str != "Admin"
+        flash[:notice] = "Page Restricted"
+      end
     	redirect_to home_path unless current_user.userable_type.to_str == "Admin"
     end
 
     def teacher?
-    	flash[:notice] = "Page Restricted"
+      if current_user.userable_type.to_str != "Teacher"
+        flash[:notice] = "Page Restricted"
+      end
     	redirect_to home_path unless current_user.userable_type.to_str == "Teacher"
+    end
+
+    def student?
+      if current_user.userable_type.to_str != "Student"
+        flash[:notice] = "Page Restricted"
+      end
+    	redirect_to home_path unless current_user.userable_type.to_str == "Student"
     end
 
   end

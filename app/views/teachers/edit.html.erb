@@ -3,7 +3,7 @@
 <%= render 'form', teacher: @teacher %>
 
 <%= link_to 'Show Profile', @teacher %> |
-<% if current_user.userable_type.to_s == "Admin"%>
+<% if current_user.userable_type.to_s != "Teacher"%>
     <%= link_to 'View Teachers', teachers_path %> |
 <% end %>
 <%= link_to 'Home', home_path %>

@@ -18,19 +18,24 @@ s2 = Student.create(discipline_id: 2)
 Profile.create(first_name: "student2", last_name: "GGM", email: "student2@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s2.id, userable_type: "Student")
 
 a = Admin.create()
-Profile.create(first_name: "admin", last_name: "GGM", email: "admin@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: a.id, userable_type: "Admin")
+Profile.create(first_name: "admin", last_name: "GGM", email: "admin@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: a.id, userable_type: "Admin")
 
 t1 = Teacher.create(discipline_id: 1)
-Profile.create(first_name: "teacher1", last_name: "GGM", email: "teacher1@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t1.id, userable_type: "Teacher")
+Profile.create(first_name: "teacher1", last_name: "GGM", email: "teacher1@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: t1.id, userable_type: "Teacher")
 
 t2 = Teacher.create(discipline_id: 2)
-Profile.create(first_name: "teacher2", last_name: "GGM", email: "teacher2@GGM.edu", phone_number: 9929, address: "internet", password: "123", password_confirmation: "123", userable_id: t2.id, userable_type: "Teacher")
+Profile.create(first_name: "teacher2", last_name: "GGM", email: "teacher2@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: t2.id, userable_type: "Teacher")
 
-Course.create(course_number: 517, name: "OODD", discipline_id: 1, area: "Software Development", price: 999)
-Course.create(course_number: 563, name: "Micro Architecture", discipline_id: 2, area: "Computer Architecture", price: 999)
-Course.create(course_number: 560, name: "Embedded Systems Architecture", discipline_id: 2, area: "Embedded Systems", price: 999)
-Course.create(course_number: 566, name: "Compilers", discipline_id: 2, area: "Software Development", price: 999)
+c1 = Course.create(course_number: 517, name: "OODD", discipline_id: 1, area: "Software Development", price: 999)
+c2 = Course.create(course_number: 563, name: "Micro Architecture", discipline_id: 2, area: "Computer Architecture", price: 999)
+c3 = Course.create(course_number: 560, name: "Embedded Systems Architecture", discipline_id: 2, area: "Embedded Systems", price: 999)
+c4 = Course.create(course_number: 566, name: "Compilers", discipline_id: 2, area: "Software Development", price: 999)
 
-CourseSection.create(course_id: 1, teacher_id: 1)
+cs1 = CourseSection.create(course_id: c1.id, teacher_id: t1.id)
+cs2 = CourseSection.create(course_id: c2.id, teacher_id: t2.id)
 
-CreditCard.create(name: "student", card_number: 1234567812345678, expiration_date: "2024-09-13", cvv: 123, student_id: 1)
+cc1 = CreditCard.create(name: "student1 GGM", card_number: 1234567812345678, expiration_date: "2024-09-13", cvv: 123, student_id: s1.id)
+cc2 = CreditCard.create(name: "student1 GGM", card_number: 1234567812345678, expiration_date: "2024-09-13", cvv: 123, student_id: s1.id)
+
+f1 = Feedback.create(student_id: s1.id, teacher_id: t1.id, course_section_id: cs1.id, description: "description")
+f2 = Feedback.create(student_id: s2.id, teacher_id: t2.id, course_section_id: cs2.id, description: "description")

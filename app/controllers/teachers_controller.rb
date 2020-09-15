@@ -1,10 +1,18 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :teacher_edit_access?, only: [:edit, :update, :show]
+  before_action :teacher_show_access?, only: [:show]
+  before_action :teacher_index_access?, only: [:index]
+  before_action :admin?, only: [:new, :create, :destroy]
 
   # GET /teachers
   # GET /teachers.json
   def index
-    @teachers = Teacher.all
+    if current_user.userable_type.to_str == "Student"
+      @teachers = Teacher.where(discipline_id: current_user.userable.discipline_id)
+    elsif current_user.userable_type.to_str == "Admin"
+      @teachers = Teacher.all
+    end
   end
 
   # GET /teachers/1
@@ -71,5 +79,32 @@ class TeachersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def teacher_params
       params.require(:teacher).permit(:discipline_id, profile_attributes: [:first_name, :last_name, :email, :phone_number, :address, :password, :password_confirmation])
+    end
+
+    def teacher_edit_access?
+      if current_user.userable_type.to_str == "Teacher"
+        if current_user.userable != @teacher
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
+      elsif current_user.userable_type.to_str == "Student"
+        redirect_to home_path
+      end
+    end
+
+    def teacher_show_access?
+      if current_user.userable_type.to_str == "Teacher"
+        if current_user.userable != @teacher
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
+      end
+    end
+
+    def teacher_index_access?
+      if current_user.userable_type.to_str == "Teacher"
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
     end
 end
