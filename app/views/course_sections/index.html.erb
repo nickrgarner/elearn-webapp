@@ -16,9 +16,13 @@
       <tr>
         <td><%= @course.name %></td>
         <td><%= course_section.teacher.profile.name %></td>
-        <%# <td><%= link_to 'Show', course_course_section_path(@course, course_section) %></td>
-        <%# <td><%= link_to 'Edit', edit_course_course_section_path(course_section) %></td>
-        <%# <td><%= link_to 'Destroy', course_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Add to Cart', {:controller => "carts", :action => "addtocart", :course => @course,
+                                          :course_section => course_section, :method => :post} %></td>
+        <td><%= button_to 'Remove from Cart', {:controller => "carts", :action => "removefromcart", :course => @course,
+                                               :course_section => course_section, :method => :post} %></td>
+<!--        <%# <td><%= link_to 'Show', course_course_section_path(@course, course_section) %></td>-->
+<!--        <%# <td><%= link_to 'Edit', edit_course_course_section_path(course_section) %></td>-->
+<!--        <%# <td><%= link_to 'Destroy', course_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>

@@ -12,15 +12,15 @@ class CartsController < ApplicationController
   def show
   end
 
-  # GET /carts/new
-  def new
-    @cart = Cart.new
-  end
-
-  # GET /carts/1/edit
-  def edit
-  end
-
+  # # GET /carts/new
+  # def new
+  #   @cart = Cart.new
+  # end
+  #
+  # # GET /carts/1/edit
+  # def edit
+  # end
+  #
   # POST /carts
   # POST /carts.json
   def create
@@ -36,29 +36,39 @@ class CartsController < ApplicationController
       end
     end
   end
+  #
+  # # PATCH/PUT /carts/1
+  # # PATCH/PUT /carts/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @cart.update(cart_params)
+  #       format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @cart }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @cart.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+  #
+  # # DELETE /carts/1
+  # # DELETE /carts/1.json
+  # def destroy
+  #   @cart.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
-  # PATCH/PUT /carts/1
-  # PATCH/PUT /carts/1.json
-  def update
-    respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { render :edit }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
+  def addtocart
+    @course_section = params[:course_section]
+    CartObject.create(:cart_id => @cart[:id], :course_section_id => @course_section)
   end
 
-  # DELETE /carts/1
-  # DELETE /carts/1.json
-  def destroy
-    @cart.destroy
-    respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def removefromcart
+    @course_section = params[:course_section]
+    CartObject.destroy( CartObject.where(:cart_id => @cart[:id], :course_section_id => @course_section))
   end
 
   private
