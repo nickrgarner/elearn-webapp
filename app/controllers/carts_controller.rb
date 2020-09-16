@@ -31,7 +31,7 @@ class CartsController < ApplicationController
 
   def checkout
     @cart.cart_objects.each{|x| x.destroy}
-    flash[:notice] = "Purchase successfull."
+    flash[:notice] = "Purchase successful."
     redirect_to params[:link]
   end
 
