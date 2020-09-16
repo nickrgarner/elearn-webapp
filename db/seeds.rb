@@ -32,7 +32,7 @@ Course.create(course_number: 563, name: "Micro Architecture", discipline_id: 2, 
 Course.create(course_number: 560, name: "Embedded Systems Architecture", discipline_id: 2, area: "Embedded Systems", price: 999)
 Course.create(course_number: 566, name: "Compilers", discipline_id: 2, area: "Software Development", price: 999)
 
-c1 = CourseSection.create(course_id: 1, teacher_id: 1)
+CourseSection.create(course_id: 1, teacher_id: 1)
 
 CreditCard.create(name: "student", card_number: 1234567812345678, expiration_date: "2024-09-13", cvv: 123, student_id: 1)
 

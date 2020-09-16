@@ -23,9 +23,6 @@
             <td><%= button_to 'Add to Cart', student_cart_add_path(current_user.userable.id), params: {course_section_id: course_section} %></td>
           <% end %>
         <% end %>
-<!--        <%# <td><%= link_to 'Show', course_course_section_path(@course, course_section) %></td>-->
-<!--        <%# <td><%= link_to 'Edit', edit_course_course_section_path(course_section) %></td>-->
-<!--        <%# <td><%= link_to 'Destroy', course_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>

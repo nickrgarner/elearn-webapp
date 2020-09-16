@@ -24,6 +24,7 @@
   </tbody>
 </table>
 
+<%= button_to 'Checkout', student_checkout_path(current_user.userable.id) %>
 <br>
 
 <%= link_to 'Home', home_path %>
