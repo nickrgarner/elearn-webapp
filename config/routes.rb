@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   resources :teachers
   resources :students do
     resources :credit_cards, only: [:new, :create, :destroy, :edit, :show, :update]
-    resources :carts
+    resources :carts, only: [:show]
+    post 'carts/addtocart', to: 'carts#addtocart', as: 'cart_add'
+    post 'carts/removefromcart', to: 'carts#removefromcart', as: 'cart_remove'
+    post 'carts/checkout', to: 'carts#checkout', as: 'checkout'
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :purchase_histories

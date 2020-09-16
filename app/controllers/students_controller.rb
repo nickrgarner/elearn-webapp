@@ -27,6 +27,8 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(student_params)
+    @student.cart = Cart.new
+    @student.cart.cart_objects.build
 
     respond_to do |format|
       if @student.save

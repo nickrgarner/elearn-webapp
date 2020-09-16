@@ -10,11 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_002047) do
+ActiveRecord::Schema.define(version: 2020_09_15_130036) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "cart_objects", force: :cascade do |t|
+    t.integer "cart_id", null: false
+    t.integer "course_section_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cart_id"], name: "index_cart_objects_on_cart_id"
+    t.index ["course_section_id"], name: "index_cart_objects_on_course_section_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -111,4 +120,6 @@ ActiveRecord::Schema.define(version: 2020_09_13_002047) do
     t.index ["discipline_id"], name: "index_teachers_on_discipline_id"
   end
 
+  add_foreign_key "cart_objects", "carts"
+  add_foreign_key "cart_objects", "course_sections"
 end

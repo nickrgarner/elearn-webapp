@@ -4,6 +4,7 @@
 
 <p>This is a static student homepage for now. The links can be dependent on the student_id as to where it re-directs.</p>
 
+<%= link_to "View Cart", student_cart_path(current_user.userable.id, current_user.userable.cart.id) %> |
 <%= link_to "Courses", courses_path %> |
 <%= link_to "Edit Profile", edit_student_path(current_user.userable.id) %> |
 <%= link_to "Teacher Selection", teachers_path %> |
