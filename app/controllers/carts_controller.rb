@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :add_to_cart, :remove_from_cart]
+  before_action :set_cart, only: [:show, :add_to_cart, :remove_from_cart, :checkout]
 
   # GET /carts/1
   # GET /carts/1.json
@@ -30,7 +30,9 @@ class CartsController < ApplicationController
   end
 
   def checkout
-
+    @cart.cart_objects.each{|x| x.destroy}
+    flash[:notice] = "Purchase successfull."
+    redirect_to params[:link]
   end
 
   private
