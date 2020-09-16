@@ -1,8 +1,10 @@
+<p id="notice" ><%= notice %></p>
 <h1>New Course Section</h1>
-
 <%= render 'form', course_section: @course_section %>
 
-<%= link_to 'View Course Sections', course_course_sections_path(@course) %> |
+<% if current_user.userable_type.to_str != "Teacher"%>
+    <%= link_to 'View Course Sections', course_course_sections_path(@course) %> |
+<% end %>
 <%= link_to 'View Course', course_path(@course) %> |
 <%= link_to 'View Courses', courses_path %> |
 <%= link_to 'Home', home_path %>

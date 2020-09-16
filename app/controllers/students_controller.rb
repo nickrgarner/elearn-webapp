@@ -1,6 +1,10 @@
 class StudentsController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :student_edit_access?, only: [:edit, :update]
+  before_action :student_show_access?, only: [:show]
+  before_action :student_index_access?, only: [:index]
+  before_action :admin?, only: [:new, :create, :destroy]
 
   # GET /students
   # GET /students.json
@@ -74,5 +78,33 @@ class StudentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def student_params
       params.require(:student).permit(:discipline_id, profile_attributes: [:first_name, :last_name, :email, :phone_number, :address, :password, :password_confirmation])
+    end
+
+    def student_edit_access?
+      if current_user.userable_type.to_str == "Student"
+        if current_user.userable != @student
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
+      elsif current_user.userable_type.to_str == "Teacher"
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
+    end
+
+    def student_show_access?
+      if current_user.userable_type.to_str == "Student"
+        if current_user.userable != @student
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
+      end
+    end
+
+    def student_index_access?
+      if current_user.userable_type.to_str != "Admin"
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
     end
 end

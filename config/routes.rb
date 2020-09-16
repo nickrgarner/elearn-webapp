@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :course_sections, only: [:new, :create, :index]
     post 'course_sections/register', to: 'course_sections#register', as: 'register'
   end
-  resources :admins
+  resources :admins, only: [:edit, :show, :update]
   resources :user_constraints
   resources :application
 

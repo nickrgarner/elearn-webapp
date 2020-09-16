@@ -7,8 +7,9 @@
   <%= Discipline.find(@teacher.discipline_id).name %>
 </p>
 
-<% if current_user.userable_type.to_s == "Admin"%>
+<% if current_user.userable_type.to_s != "Student"%>
   <%= link_to 'Edit Profile', edit_teacher_path(@teacher) %> |
+<% elsif current_user.userable_type.to_s != "Teacher"%>
   <%= link_to 'View Teachers', teachers_path %> |
 <% end %>
 <%= link_to 'Home', home_path %>

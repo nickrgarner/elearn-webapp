@@ -1,5 +1,5 @@
 class Student < ApplicationRecord
-    has_one :profile, as: :userable , dependent: :destroy
+    has_one :profile, as: :userable 
     accepts_nested_attributes_for :profile, update_only: true
     belongs_to :discipline
     has_one :credit_card, dependent: :destroy
