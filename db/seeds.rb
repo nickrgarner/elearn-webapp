@@ -13,6 +13,7 @@ Discipline.create(name: "MAE")
 
 s1 = Student.create(discipline_id: 1)
 Profile.create(first_name: "student1", last_name: "GGM", email: "student1@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s1.id, userable_type: "Student")
+Cart.create(student_id: s1.id)
 
 s2 = Student.create(discipline_id: 2)
 Profile.create(first_name: "student2", last_name: "GGM", email: "student2@GGM.edu", phone_number: 999, address: "internet", password: "123", password_confirmation: "123", userable_id: s2.id, userable_type: "Student")
@@ -40,3 +41,6 @@ cc2 = CreditCard.create(name: "student1 GGM", card_number: 1234567812345678, exp
 
 f1 = Feedback.create(student_id: s1.id, teacher_id: t1.id, course_section_id: cs1.id, description: "description")
 f2 = Feedback.create(student_id: s2.id, teacher_id: t2.id, course_section_id: cs2.id, description: "description")
+
+CartObject.create(course_section_id: 1, cart_id: 1)
+

@@ -1,74 +1,70 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
-
-  # GET /carts
-  # GET /carts.json
-  def index
-    @carts = Cart.all
-  end
+  before_action :set_cart, only: [:show, :addtocart, :removefromcart]
 
   # GET /carts/1
   # GET /carts/1.json
   def show
   end
 
-  # GET /carts/new
-  def new
-    @cart = Cart.new
-  end
+  # # POST /carts
+  # # POST /carts.json
+  # def create
+  #   @cart = Cart.new(cart_params)
 
-  # GET /carts/1/edit
-  def edit
-  end
+  #   respond_to do |format|
+  #     if @cart.save
+  #       format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
+  #       format.json { render :show, status: :created, location: @cart }
+  #     else
+  #       format.html { render :new }
+  #       format.json { render json: @cart.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
-  # POST /carts
-  # POST /carts.json
-  def create
-    @cart = Cart.new(cart_params)
+  # # DELETE /carts/1
+  # # DELETE /carts/1.json
+  # def destroy
+  #   @cart.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
+  def addtocart
+    course_section = CourseSection.find(params[:course_section_id])
+    if @cart.cart_objects.where(course_section_id: course_section.id).any?
+      flash[:notice] = "Item already added to cart"
+    else
+      @cart.cart_objects.create(course_section_id: course_section.id)
+      flash[:notice] = "Item added to cart"
     end
   end
 
-  # PATCH/PUT /carts/1
-  # PATCH/PUT /carts/1.json
-  def update
-    respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { render :edit }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
+  def removefromcart
+    course_section = CourseSection.find(params[:course_section_id])
+    cart_object = @cart.cart_objects.find_by(course_section_id: course_section.id)
+    if cart_object
+      cart_object.destroy
+      flash[:notice] = "Item removed from cart"
+    else
+      flash[:notice] = "Item does not exist in cart"
     end
   end
 
-  # DELETE /carts/1
-  # DELETE /carts/1.json
-  def destroy
-    @cart.destroy
-    respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def checkout
+
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
-      @cart = Cart.find(params[:id])
+      @cart = current_user.userable.cart
     end
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      params.fetch(:cart, {})
+      params.require(:course_section)
     end
 end
