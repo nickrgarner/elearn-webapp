@@ -34,3 +34,6 @@ Course.create(course_number: 566, name: "Compilers", discipline_id: 2, area: "So
 CourseSection.create(course_id: 1, teacher_id: 1)
 
 CreditCard.create(name: "student", card_number: 1234567812345678, expiration_date: "2024-09-13", cvv: 123, student_id: 1)
+
+Cart.create(student_id: 1)
+Cart.create(student_id: 2)
