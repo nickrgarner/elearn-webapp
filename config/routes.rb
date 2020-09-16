@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :teachers
   resources :students do
-    resources :credit_cards, only: [:new, :create, :destroy, :edit, :show, :update]
-    resources :carts, only: [:show]
+    resources :credit_cards, only: [:new, :create, :destroy, :edit, :index, :update]
+    resources :carts, only: [:index]
     post 'carts/addtocart', to: 'carts#add_to_cart', as: 'cart_add'
     post 'carts/removefromcart', to: 'carts#remove_from_cart', as: 'cart_remove'
     post 'carts/checkout', to: 'carts#checkout', as: 'checkout'

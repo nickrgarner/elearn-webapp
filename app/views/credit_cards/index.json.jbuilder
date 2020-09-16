@@ -1,1 +1,1 @@
-json.array! @credit_cards, partial: "credit_cards/credit_card", as: :credit_card
+json.array! @credit_card, partial: "credit_cards/credit_card", as: :credit_card

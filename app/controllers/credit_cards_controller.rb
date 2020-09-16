@@ -1,9 +1,10 @@
 class CreditCardsController < ApplicationController
-  before_action :set_credit_card, only: [:show, :edit, :update, :destroy]
+  before_action :authorized?, only: [:new, :create]
+  before_action :authorized_set_params?, only: [:index, :edit, :update, :destroy]
 
-  # GET /credit_cards/1
-  # GET /credit_cards/1.json
-  def show
+  # GET /credit_cards
+  # GET /credit_cards.json
+  def index
   end
 
   # GET /credit_cards/new
@@ -70,5 +71,33 @@ class CreditCardsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def credit_card_params
       params.require(:credit_card).permit(:student_id, :name, :card_number, :expiration_date, :cvv)
+    end
+
+    def authorized?
+      @student = Student.find(params[:student_id])
+      if current_user.userable_type.to_str == "Student"
+        if current_user.userable != @student
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
+      else
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
+    end
+
+    def authorized_set_params?
+      @student = Student.find(params[:student_id])
+      if current_user.userable_type.to_str == "Student"
+        if current_user.userable != @student
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        else
+          set_credit_card
+        end
+      else
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
     end
 end

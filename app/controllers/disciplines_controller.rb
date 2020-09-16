@@ -1,6 +1,7 @@
 class DisciplinesController < ApplicationController
   before_action :set_discipline, only: [:show, :edit, :update, :destroy]
-
+  before_action :admin?, only: [:show, :edit, :update, :destroy, :index, :new, :create]
+  
   # GET /disciplines
   # GET /disciplines.json
   def index
