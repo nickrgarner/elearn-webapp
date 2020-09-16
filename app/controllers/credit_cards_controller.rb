@@ -2,8 +2,8 @@ class CreditCardsController < ApplicationController
   before_action :authorized?, only: [:new, :create]
   before_action :authorized_set_params?, only: [:index, :edit, :update, :destroy]
 
-  # GET /credit_cards/1
-  # GET /credit_cards/1.json
+  # GET /credit_cards
+  # GET /credit_cards.json
   def index
   end
 

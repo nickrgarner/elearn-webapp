@@ -1,8 +1,8 @@
 class CartsController < ApplicationController
   before_action :authorized?, only: [:index, :add_to_cart, :remove_from_cart, :checkout]
   
-  # GET /carts/1
-  # GET /carts/1.json
+  # GET /carts
+  # GET /carts.json
   def index
   end
 
