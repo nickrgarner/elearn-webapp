@@ -18,13 +18,15 @@
       <td><%= cart_object.course_section.course.name %></td>
       <td><%= cart_object.course_section.id %></td>
       <td><%= cart_object.course_section.course.price %></td>
-      <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable.id), params: {course_section_id: cart_object.course_section} %></td>
+      <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable.id), params: {course_section_id: cart_object.course_section, link: student_cart_path(current_user.userable, current_user.userable.cart)} %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 
-<%= button_to 'Checkout', student_checkout_path(current_user.userable.id) %>
+<% if CartObject.where(cart_id: current_user.userable.cart.id).any? == true && @current_user.userable.credit_card != nil%>
+  <%= button_to 'Checkout', student_checkout_path(current_user.userable), params: {course_section_id: 0, link: student_cart_path(current_user.userable, current_user.userable.cart)} %>
+<% end %>
 <br>
 
 <%= link_to 'Home', home_path %>
