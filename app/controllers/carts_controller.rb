@@ -33,20 +33,20 @@ class CartsController < ApplicationController
   # end
 
   def addtocart
-    @course_section = CourseSection.find(params[:course_section_id])
-    if @cart.cart_objects.where(cart_id: @cart.id, course_section_id: @course_section.id).any?
+    course_section = CourseSection.find(params[:course_section_id])
+    if @cart.cart_objects.where(course_section_id: course_section.id).any?
       flash[:notice] = "Item already added to cart"
     else
-      @cart.cart_objects.create(cart_id: @cart.id, course_section_id: @course_section.id)
+      @cart.cart_objects.create(course_section_id: course_section.id)
       flash[:notice] = "Item added to cart"
     end
   end
 
   def removefromcart
-    @course_section = CourseSection.find(params[:course_section_id])
-    if @cart.cart_objects.where(cart_id: @cart.id, course_section_id: @course_section.id).any?
-      @cart_object = @cart.cart_objects.where(cart_id: @cart.id, course_section_id: @course_section.id)
-      @cart_object.destroy
+    course_section = CourseSection.find(params[:course_section_id])
+    cart_object = @cart.cart_objects.find_by(course_section_id: course_section.id)
+    if cart_object
+      cart_object.destroy
       flash[:notice] = "Item removed from cart"
     else
       flash[:notice] = "Item does not exist in cart"

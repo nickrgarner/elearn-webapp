@@ -5,6 +5,6 @@ class CourseSection < ApplicationRecord
     has_many :students, through: :purchase_histories
     has_many :purchase_histories
     has_many :cart_objects
-    has_many :carts, :through => :cart_objects
+    has_many :carts, through: :cart_objects
   end
   
