@@ -18,8 +18,7 @@
       <td><%= cart_object.course_section.course.name %></td>
       <td><%= cart_object.course_section.id %></td>
       <td><%= cart_object.course_section.course.price %></td>
-      <td><%= button_to 'Remove from Cart', {:controller => "carts", :action => "removefromcart",
-                                             :course_section => course_section}, :method => :post %></td>
+      <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable.id), params: {course_section_id: cart_object.course_section} %></td>
     </tr>
   <% end %>
   </tbody>

@@ -16,8 +16,13 @@
       <tr>
         <td><%= @course.name %></td>
         <td><%= course_section.teacher.profile.name %></td>
-        <td><%= button_to 'Add to Cart', student_cart_add_path(current_user.userable.id), {:course_section => course_section} %></td>
-        <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable.id), {:course_section => course_section} %></td>
+        <% if current_user.userable_type.to_str == "Student"%>
+          <% if current_user.userable.cart.cart_objects.where(cart_id: current_user.userable.cart.id, course_section_id: course_section.id).any?%>
+            <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable.id), params: {course_section_id: course_section} %></td>
+          <% else %>
+            <td><%= button_to 'Add to Cart', student_cart_add_path(current_user.userable.id), params: {course_section_id: course_section} %></td>
+          <% end %>
+        <% end %>
 <!--        <%# <td><%= link_to 'Show', course_course_section_path(@course, course_section) %></td>-->
 <!--        <%# <td><%= link_to 'Edit', edit_course_course_section_path(course_section) %></td>-->
 <!--        <%# <td><%= link_to 'Destroy', course_section, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
