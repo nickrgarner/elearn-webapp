@@ -28,7 +28,7 @@
           <td><%= link_to 'Create Course Section', new_course_course_section_path(course) %></td>
           <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% elsif current_user.userable_type.to_s == "Teacher"%>
-          <% if current_user.userable.course_sections.where(course_id: course.id) %>
+          <% if CourseSection.where(teacher_id: current_user.userable.id, course_id: course.id).any? %>
             <td>Registered</td>
           <% else %>
             <td><%= link_to 'Create Course Section', course_register_path(course), method: :post %></td>

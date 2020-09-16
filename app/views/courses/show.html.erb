@@ -30,7 +30,7 @@
   <%= link_to 'Create Course Section', new_course_course_section_path(@course) %> |
 <% end %>
 <% if current_user.userable_type.to_s == "Teacher"%>
-  <% if current_user.userable.course_sections.where(course_id: @course.id) %>
+  <% if CourseSection.where(teacher_id: current_user.userable.id, course_id: @course.id).any? == true %>
     Registered |
   <% else %>
     <%= link_to 'Create Course Section', course_register_path(@course), method: :post %> |
