@@ -1,9 +1,9 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :add_to_cart, :remove_from_cart, :checkout]
-
+  before_action :authorized?, only: [:index, :add_to_cart, :remove_from_cart, :checkout]
+  
   # GET /carts/1
   # GET /carts/1.json
-  def show
+  def index
   end
 
   def add_to_cart
@@ -40,9 +40,24 @@ class CartsController < ApplicationController
     def set_cart
       @cart = current_user.userable.cart
     end
-
+    
     # Only allow a list of trusted parameters through.
     def cart_params
       params.require(:course_section, :link)
+    end
+    
+    def authorized?
+      @student = Student.find(params[:student_id])
+      if current_user.userable_type.to_str == "Student"
+        if current_user.userable != @student
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        else
+          set_cart
+        end
+      else
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
     end
 end

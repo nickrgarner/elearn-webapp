@@ -34,7 +34,11 @@
             <td><%= link_to 'Create Course Section', course_register_path(course), method: :post %></td>
           <% end %>
         <% end %>
-        <td><%= link_to 'View Course Sections', course_course_sections_path(course) %></td>
+        <% if course.course_sections.any? %>
+          <td><%= link_to 'View Course Sections', course_course_sections_path(course) %></td>
+        <% else %>
+          <td>No Course Sections</td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

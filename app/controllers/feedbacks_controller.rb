@@ -1,5 +1,7 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
+  before_action :student?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authorized?, only: [:edit, :update, :destroy]
 
   # GET /feedbacks
   # GET /feedbacks.json
@@ -76,5 +78,18 @@ class FeedbacksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def feedback_params
       params.require(:feedback).permit(:description)
+    end
+
+    def authorized?
+      @student =  @feedback.student
+      if current_user.userable_type.to_str == "Student"
+        if current_user.userable != @student
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
+      else
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
     end
 end

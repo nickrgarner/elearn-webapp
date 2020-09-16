@@ -1,9 +1,9 @@
 class CourseSectionsController < ApplicationController
-  # GET /course_sections
-  # GET /course_sections.json
   before_action :admin?, only: [:new, :create]
   before_action :teacher?, only: [:register]
-
+ 
+  # GET /course_sections
+  # GET /course_sections.json
   def index
     @course = Course.find(params[:course_id])
     @course_sections = @course.course_sections.all

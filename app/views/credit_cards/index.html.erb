@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Credit Card</h1>
+
 <p>
   <strong>Name:</strong>
   <%= @credit_card.name %>
@@ -20,6 +22,6 @@
   <%= @credit_card.cvv %>
 </p>
 
-<%= link_to 'Edit', edit_student_credit_card_path(@student) %> |
+<%= link_to 'Edit', edit_student_credit_card_path(@student, @credit_card) %> |
 <%= link_to 'View Student Profile', student_path(@student) %> |
 <%= link_to 'Home', home_path %>
