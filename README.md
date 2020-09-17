@@ -22,7 +22,7 @@
 
 ## Requirements
 * [**Ruby v2.6.6**](https://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.6.tar.gz)
-* [**Ruby on Rails v6.3.2**](https://guides.rubyonrails.org/v5.0/getting_started.html#installing-rails)<br>
+* [**Ruby on Rails v6.0.3.3**](https://guides.rubyonrails.org/v5.0/getting_started.html#installing-rails)<br>
 
 ## Features Implemented
 * Admin role
