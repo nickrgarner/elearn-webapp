@@ -10,6 +10,7 @@ class PurchaseHistoriesController < ApplicationController
   # GET /purchase_histories/1
   # GET /purchase_histories/1.json
   def show
+    @purchases = PurchaseHistory.where(student_id = current_user.userable.id)
   end
 
   # GET /purchase_histories/new
@@ -69,6 +70,6 @@ class PurchaseHistoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_history_params
-      params.fetch(:purchase_history, {})
+      params.require(:course_section, :price)
     end
 end
