@@ -10,7 +10,7 @@
 <% if current_user.userable_type.to_s == "Student"%>
   <% if @student.credit_card.nil? %>
     <%= link_to 'Add Credit Card', new_student_credit_card_path(@student) %> |
-  <% elsif %>
+  <% else %>
     <%= link_to 'Show Credit Card', student_credit_cards_path(@student) %> |
     <%= link_to 'Edit Credit Card', edit_student_credit_card_path(@student) %> |
     <%= link_to 'Delete Credit Card', [@student, @student.credit_card], method: :delete, data: { confirm: 'Are you sure?' } %> |

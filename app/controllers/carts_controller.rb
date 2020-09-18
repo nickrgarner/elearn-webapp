@@ -30,7 +30,11 @@ class CartsController < ApplicationController
   end
 
   def checkout
-    @cart.cart_objects.each{|x| x.destroy}
+    @cart.cart_objects.each do |cart_object|
+      PurchaseHistory.create(student_id: current_user.userable.id, course_section_id: cart_object.course_section.id,
+          price: cart_object.course_section.course.price)
+      cart_object.destroy
+    end
     flash[:notice] = "Purchase successful."
     redirect_to params[:link]
   end
