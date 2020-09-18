@@ -4,7 +4,8 @@ class StudentsController < ApplicationController
   before_action :student_edit_access?, only: [:edit, :update]
   before_action :student_show_access?, only: [:show]
   before_action :student_index_access?, only: [:index]
-  before_action :admin?, only: [:new, :create, :destroy]
+  before_action :student_create_access?, only: [:create]
+  before_action :admin?, only: [:new, :destroy]
 
   # GET /students
   # GET /students.json
@@ -107,4 +108,12 @@ class StudentsController < ApplicationController
         redirect_to home_path
       end
     end
+
+    def student_create_access?
+      if current_user.userable_type.to_str != "Admin" || logged_in?
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
+    end
+
 end

@@ -50,5 +50,8 @@ class ApplicationController < ActionController::Base
     	redirect_to home_path unless current_user.userable_type.to_str == "Student"
     end
 
+    def user_is(type)?
+      current_user.userable_type.to_str == type
+    end
   end
   
