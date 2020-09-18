@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_130036) do
+ActiveRecord::Schema.define(version: 2020_09_18_010713) do
 
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_130036) do
     t.integer "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "price"
     t.index ["course_section_id"], name: "index_purchase_histories_on_course_section_id"
     t.index ["student_id"], name: "index_purchase_histories_on_student_id"
   end
