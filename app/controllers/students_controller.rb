@@ -110,9 +110,7 @@ class StudentsController < ApplicationController
     end
 
     def student_create_access?
-      if logged_in?
-        flash[:notice] = "Page Restricted"
-        redirect_to home_path
+      if !logged_in?
       elsif current_user.userable_type.to_str != "Admin"
         flash[:notice] = "Page Restricted"
         redirect_to home_path
