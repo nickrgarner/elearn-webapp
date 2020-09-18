@@ -4,7 +4,8 @@ class StudentsController < ApplicationController
   before_action :student_edit_access?, only: [:edit, :update]
   before_action :student_show_access?, only: [:show]
   before_action :student_index_access?, only: [:index]
-  before_action :admin?, only: [:new, :create, :destroy]
+  before_action :student_create_access?, only: [:new,:create]
+  before_action :admin?, only: [:destroy]
 
   # GET /students
   # GET /students.json
@@ -31,11 +32,12 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(student_params)
-    @student.cart = Cart.new
+    @student.cart = Cart.new(student_id: @student.id)
     @student.cart.cart_objects.build
 
     respond_to do |format|
       if @student.save
+        @student.cart.save
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
@@ -103,6 +105,14 @@ class StudentsController < ApplicationController
 
     def student_index_access?
       if current_user.userable_type.to_str != "Admin"
+        flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
+    end
+
+    def student_create_access?
+      if current_user.nil?
+      elsif current_user.userable_type.to_str != "Admin"
         flash[:notice] = "Page Restricted"
         redirect_to home_path
       end
