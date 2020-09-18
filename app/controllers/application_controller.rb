@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
     helper_method :admin?
     helper_method :teacher?
     helper_method :student?
+    helper_method :user_is?
 
   	def index
   		flash[:notice] = "Sorry that page was not found."
@@ -50,7 +51,7 @@ class ApplicationController < ActionController::Base
     	redirect_to home_path unless current_user.userable_type.to_str == "Student"
     end
 
-    def user_is(type)?
+    def user_is?(type)
       current_user.userable_type.to_str == type
     end
   end
