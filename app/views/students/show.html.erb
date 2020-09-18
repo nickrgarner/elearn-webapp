@@ -16,7 +16,6 @@
     <%= link_to 'Delete Credit Card', [@student, @student.credit_card], method: :delete, data: { confirm: 'Are you sure?' } %> |
   <% end %>
   <%= link_to 'Edit Profile', edit_student_path(@student) %> |
-  <%= link_to 'View Purchase History', purchase_histories_path %> |
 <% end %>
 <% if current_user.userable_type.to_s == "Admin"%>
 	<%= link_to 'Edit Profile', edit_student_path(@student) %> |
