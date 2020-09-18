@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_130036) do
 
   create_table "credit_cards", force: :cascade do |t|
     t.string "name"
-    t.integer "card_number", :int8, limit: 8
+    t.integer "card_number"
     t.date "expiration_date"
     t.integer "cvv"
     t.integer "student_id"
