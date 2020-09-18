@@ -4,8 +4,8 @@ class StudentsController < ApplicationController
   before_action :student_edit_access?, only: [:edit, :update]
   before_action :student_show_access?, only: [:show]
   before_action :student_index_access?, only: [:index]
-  before_action :student_create_access?, only: [new:, :create]
-  before_action :admin?, only: [:new, :destroy]
+  before_action :student_new_access?, only: [new:]
+  before_action :admin?, only: [:destroy]
 
   # GET /students
   # GET /students.json
