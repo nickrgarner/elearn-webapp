@@ -3,8 +3,6 @@ class CreateCartObjects < ActiveRecord::Migration[6.0]
     create_table :cart_objects do |t|
       t.references :cart, null: false, foreign_key: true
       t.references :course_section, null: false, foreign_key: true
-      t.references :student
-
       t.timestamps
     end
   end
