@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     post 'carts/checkout', to: 'carts#checkout', as: 'checkout'
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :purchase_histories
+  resources :purchase_histories, only: [:show]
   resources :feedbacks
   resources :disciplines
   resources :courses do

@@ -12,14 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2020_09_18_010713) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "cart_objects", force: :cascade do |t|
-    t.integer "cart_id", null: false
-    t.integer "course_section_id", null: false
+    t.bigint "cart_id", null: false
+    t.bigint "course_section_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_cart_objects_on_cart_id"
@@ -27,15 +30,15 @@ ActiveRecord::Schema.define(version: 2020_09_18_010713) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "student_id"
+    t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["student_id"], name: "index_carts_on_student_id"
   end
 
   create_table "course_sections", force: :cascade do |t|
-    t.integer "course_id"
-    t.integer "teacher_id"
+    t.bigint "course_id"
+    t.bigint "teacher_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_id"], name: "index_course_sections_on_course_id"
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_010713) do
     t.string "name"
     t.string "area"
     t.float "price"
-    t.integer "discipline_id"
+    t.bigint "discipline_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["discipline_id"], name: "index_courses_on_discipline_id"
@@ -55,10 +58,10 @@ ActiveRecord::Schema.define(version: 2020_09_18_010713) do
 
   create_table "credit_cards", force: :cascade do |t|
     t.string "name"
-    t.integer "card_number"
+    t.bigint "card_number"
     t.date "expiration_date"
     t.integer "cvv"
-    t.integer "student_id"
+    t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["student_id"], name: "index_credit_cards_on_student_id"
@@ -72,9 +75,9 @@ ActiveRecord::Schema.define(version: 2020_09_18_010713) do
 
   create_table "feedbacks", force: :cascade do |t|
     t.string "description"
-    t.integer "student_id"
-    t.integer "teacher_id"
-    t.integer "course_section_id"
+    t.bigint "student_id"
+    t.bigint "teacher_id"
+    t.bigint "course_section_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["course_section_id"], name: "index_feedbacks_on_course_section_id"
@@ -90,7 +93,7 @@ ActiveRecord::Schema.define(version: 2020_09_18_010713) do
     t.text "address"
     t.string "password_digest"
     t.string "userable_type"
-    t.integer "userable_id"
+    t.bigint "userable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_profiles_on_email", unique: true
@@ -98,8 +101,8 @@ ActiveRecord::Schema.define(version: 2020_09_18_010713) do
   end
 
   create_table "purchase_histories", force: :cascade do |t|
-    t.integer "course_section_id"
-    t.integer "student_id"
+    t.bigint "course_section_id"
+    t.bigint "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "price"
@@ -108,14 +111,14 @@ ActiveRecord::Schema.define(version: 2020_09_18_010713) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.integer "discipline_id"
+    t.bigint "discipline_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["discipline_id"], name: "index_students_on_discipline_id"
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.integer "discipline_id"
+    t.bigint "discipline_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["discipline_id"], name: "index_teachers_on_discipline_id"

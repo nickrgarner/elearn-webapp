@@ -33,11 +33,10 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.cart = Cart.new(student_id: @student.id)
-    @student.cart.cart_objects.build
 
     respond_to do |format|
       if @student.save
-        @student.cart.save
+        puts @student.cart.save
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else

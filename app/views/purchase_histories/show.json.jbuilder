@@ -1,1 +1,1 @@
-json.partial! "purchase_histories/purchase_history", purchase_history: @purchase_history
+json.array! @purchase_histories, partial: "purchase_histories/purchase_history", as: :purchase_history
