@@ -64,8 +64,8 @@ c8 = Course.create(course_number: 561, name: "Embedded Systems Optimization", di
 cs1 = CourseSection.create(course_id: c1.id, teacher_id: t1.id)
 cs2 = CourseSection.create(course_id: c2.id, teacher_id: t2.id)
 
-cc1 = CreditCard.create(name: "student1 GGM", card_number: "1234567812345678", expiration_date: "2024-09-13", cvv: 123, student_id: s1.id)
-cc2 = CreditCard.create(name: "student2 GGM", card_number: "1234567812345678", expiration_date: "2024-09-13", cvv: 123, student_id: s2.id)
+cc1 = CreditCard.create(name: "student1 GGM", card_number: 1234567812345678, expiration_date: "2024-09-13", cvv: 123, student_id: s1.id)
+cc2 = CreditCard.create(name: "student2 GGM", card_number: 1234567812345678, expiration_date: "2024-09-13", cvv: 123, student_id: s2.id)
 
 f1 = Feedback.create(student_id: s1.id, teacher_id: t1.id, course_section_id: cs1.id, description: "description")
 f2 = Feedback.create(student_id: s2.id, teacher_id: t2.id, course_section_id: cs2.id, description: "description")
