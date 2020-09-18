@@ -108,6 +108,7 @@ class StudentsController < ApplicationController
         redirect_to home_path
       end
     end
+    
     def student_create_access?
       if current_user.nil?
       elsif current_user.userable_type.to_str != "Admin"
