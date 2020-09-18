@@ -1,10 +1,10 @@
 class StudentsController < ApplicationController
-  skip_before_action :authorized, only: [:new]
+  skip_before_action :authorized, only: [:new, :create]
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :student_edit_access?, only: [:edit, :update]
   before_action :student_show_access?, only: [:show]
   before_action :student_index_access?, only: [:index]
-  before_action :student_create_access?, only: [:create]
+  before_action :student_create_access?, only: [new:, :create]
   before_action :admin?, only: [:new, :destroy]
 
   # GET /students
