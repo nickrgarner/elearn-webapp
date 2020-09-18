@@ -37,7 +37,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        @cart.save
+        @student.cart.save
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
