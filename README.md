@@ -23,6 +23,8 @@
 ## Requirements
 * [**Ruby v2.6.6**](https://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.6.tar.gz)
 * [**Ruby on Rails v6.0.3.3**](https://guides.rubyonrails.org/v5.0/getting_started.html#installing-rails)<br>
+* [**Yarn v1.22.5**](https://classic.yarnpkg.com/en/docs/cli/version/)
+* [**Bundler v2.1.4**](https://bundler.io/)
 
 ## Features Implemented
 * Admin role
