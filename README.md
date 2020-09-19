@@ -35,6 +35,7 @@ Feature|Path
 **Disciplines**|Admin login -> Disciplines
 **Courses**|Admin login -> Courses
 **Course Sections**|Admin login -> Courses -> View Course Sections
+**Teacher Registration**|Teacher login -> Courses -> Create Course Section
 **Shopping Cart**|Student login -> Courses -> View Course Sections -> Add/Remove to/from Cart
 **Credit Card**|Student login -> Edit Profile -> Add/Edit/Delete/Show Credit Card
 **Checkout**|Student login -> View Cart -> Checkout
