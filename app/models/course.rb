@@ -5,6 +5,6 @@ class Course < ApplicationRecord
               numericality: { only_integer: true }
     validates :name, presence: true
     validates :area, presence: true
-    validates :price, numericality: true
+    validates :price, numericality: {greater_than_or_equal_to: 0}
   end
   
