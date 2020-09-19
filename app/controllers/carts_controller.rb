@@ -8,7 +8,9 @@ class CartsController < ApplicationController
 
   def add_to_cart
     course_section = CourseSection.find(params[:course_section_id])
-    if @cart.cart_objects.where(course_section_id: course_section.id).any?
+    if PurchaseHistory.where(student_id: current_user.userable.id, course_section_id: course_section.id).any?
+      flash[:notice] = "Course already purchased"
+    elsif @cart.cart_objects.where(course_section_id: course_section.id).any?
       flash[:notice] = "Item already added to cart"
     else
       @cart.cart_objects.create(course_section_id: course_section.id)
