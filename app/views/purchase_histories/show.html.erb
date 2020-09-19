@@ -7,6 +7,7 @@
   <tr>
     <th>Course Name</th>
     <th>Course Section</th>
+    <th>Teacher</th>
     <th>Price</th>
     <th>Purchase Date</th>
     <th colspan="3"></th>
@@ -15,9 +16,10 @@
 
   <tbody>
   <% @purchases.each do |purchase| %>
-    <tr>
+    <tr align="center">
       <td><%= purchase.course_section.course.name %></td>
       <td><%= purchase.course_section.id %></td>
+      <td><%= (Teacher.find_by id: purchase.course_section.teacher_id).profile.name %></td>
       <td><%= purchase.price %></td>
       <td><%= purchase.created_at %></td>
     </tr>
