@@ -31,7 +31,7 @@
           <% if CourseSection.where(teacher_id: current_user.userable.id, course_id: course.id).any? %>
             <td>Registered</td>
           <% else %>
-            <td><%= link_to 'Create Course Section', course_register_path(course), method: :post %></td>
+            <td><%= button_to 'Register', course_register_path(course), method: :post %></td>
           <% end %>
         <% end %>
         <% if course.course_sections.any? %>

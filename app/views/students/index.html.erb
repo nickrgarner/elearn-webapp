@@ -11,6 +11,9 @@
       <th>Phone number</th>
       <th>Address</th>
       <th>Major</th>
+      <% if current_user.userable_type.to_s == "Teacher" %>
+        <th>Courses Mentored</th>
+      <% end %>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,11 +27,14 @@
         <td><%= student.profile.phone_number %></td>
         <td><%= student.profile.address %></td>
         <td><%= student.discipline.name %></td>
+        <% if current_user.userable_type.to_s == "Teacher" %>
+          <td><%= student.course_sections.where(teacher_id: current_user.userable).collect{ |cs| cs.course.name}.join(', ') %></td>
+        <% end %>
         <td><%= link_to 'Show', student %></td>
-        <% if current_user.userable_type.to_s == "Admin"%>
+        <% if current_user.userable_type.to_s == "Admin" %>
           <td><%= link_to 'Edit', edit_student_path(student) %></td>
           <td><%= link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -11,7 +11,7 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     if current_user.userable_type.to_str == "Teacher"
-      @students = current_user.userable.students
+      @students = current_user.userable.students.uniq
     elsif current_user.userable_type.to_str == "Admin"
       @students = Student.all
     end

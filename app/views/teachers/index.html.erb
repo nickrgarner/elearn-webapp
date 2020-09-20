@@ -11,6 +11,9 @@
       <th>Phone number</th>
       <th>Address</th>
       <th>Discipline</th>
+      <% if current_user.userable_type.to_s == "Student" %>
+        <th>Courses Undertaken</td>
+      <% end %>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +27,9 @@
         <td><%= teacher.profile.phone_number %></td>
         <td><%= teacher.profile.address %></td>
         <td><%= teacher.discipline.name %></td>
+        <% if current_user.userable_type.to_s == "Student" %>
+          <td><%= current_user.userable.course_sections.where(teacher_id: teacher).collect{ |cs| cs.course.name}.join(', ') %></td>
+        <% end %>
         <td><%= link_to 'Show', teacher %></td>
         <% if current_user.userable_type.to_s == "Admin"%>
           <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>

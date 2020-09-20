@@ -20,11 +20,12 @@
         <td><%= course_section.teacher.profile.name %></td>
         <% if current_user.userable_type.to_str == "Student" %>
           <% if current_user.userable.courses.where(id: @course).any? %>
-
-          <% elsif current_user.userable.cart.cart_objects.where(course_id: course_section.id).any?%>
-            <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable), params: {course_section_id: course_section, link: course_course_sections_path(@course)} %></td>
-          <% elsif current_user.userable.cart.course_sections.where(course_id: course_section.course.id).any? == false %>
-            <td><%= button_to 'Add to Cart', student_cart_add_path(current_user.userable), params: {course_section_id: course_section, link: course_course_sections_path(course_section.course)} %></td>
+          <% else %>
+            <% if current_user.userable.cart.cart_objects.where(course_section_id: course_section).any? %>
+              <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable), params: {course_section_id: course_section, link: course_course_sections_path(@course)} %></td>
+            <% elsif current_user.userable.cart.course_sections.where(course_id: course_section.course.id).any? == false %>
+              <td><%= button_to 'Add to Cart', student_cart_add_path(current_user.userable), params: {course_section_id: course_section, link: course_course_sections_path(course_section.course)} %></td>
+            <% end %>
           <% end %>
         <% end %>
       </tr>
