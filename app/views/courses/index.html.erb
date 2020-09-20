@@ -39,6 +39,11 @@
         <% else %>
           <td>No Course Sections</td>
         <% end %>
+        <% if current_user.userable_type.to_s == "Student"%>
+          <% if current_user.userable.courses.where(id: course).any? %>
+            <td>Course Purchased</td>
+          <% end%>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

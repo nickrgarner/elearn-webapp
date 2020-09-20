@@ -16,8 +16,10 @@
       <tr>
         <td><%= @course.name %></td>
         <td><%= course_section.teacher.profile.name %></td>
-        <% if current_user.userable_type.to_str == "Student"%>
-          <% if current_user.userable.cart.cart_objects.where(course_section_id: course_section.id).any?%>
+        <% if current_user.userable_type.to_str == "Student" %>
+          <% if current_user.userable.courses.where(id: @course).any? %>
+
+          <% elsif current_user.userable.cart.cart_objects.where(course_id: course_section.id).any?%>
             <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable), params: {course_section_id: course_section, link: course_course_sections_path(@course)} %></td>
           <% elsif current_user.userable.cart.course_sections.where(course_id: course_section.course.id).any? == false %>
             <td><%= button_to 'Add to Cart', student_cart_add_path(current_user.userable), params: {course_section_id: course_section, link: course_course_sections_path(course_section.course)} %></td>
@@ -29,7 +31,12 @@
 </table>
 
 <br>
-<% if current_user.userable_type.to_s == "Admin"%>
+<% if current_user.userable_type.to_s == "Student" %>
+  <% if current_user.userable.courses.where(id: @course).any? %>
+    Course Already Purchased
+    <br>
+  <% end%>
+<% elsif current_user.userable_type.to_s == "Admin"%>
   <%= link_to 'Create Course Section', new_course_course_section_path %> |
 <% end %>
 <%= link_to 'View Course', course_path(@course) %> |
