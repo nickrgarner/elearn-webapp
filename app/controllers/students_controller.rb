@@ -10,7 +10,11 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    if current_user.userable_type.to_str == "Teacher"
+      @students = current_user.userable.students
+    elsif current_user.userable_type.to_str == "Admin"
+      @students = Student.all
+    end
   end
 
   # GET /students/1
@@ -99,11 +103,16 @@ class StudentsController < ApplicationController
           flash[:notice] = "Page Restricted"
           redirect_to home_path
         end
+      elsif current_user.userable_type.to_str == "Teacher"
+        if @student.teachers.where.not(id: current_user.userable).any?
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
       end
     end
 
     def student_index_access?
-      if current_user.userable_type.to_str != "Admin"
+      if current_user.userable_type.to_str == "Student"
         flash[:notice] = "Page Restricted"
         redirect_to home_path
       end
