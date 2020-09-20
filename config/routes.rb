@@ -8,13 +8,15 @@ Rails.application.routes.draw do
     post 'carts/checkout', to: 'carts#checkout', as: 'checkout'
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :purchase_histories, only: [:show]
-  resources :feedbacks
+  resources :purchase_histories, only: [:index]
   resources :disciplines
   resources :courses do
-    resources :course_sections, only: [:new, :create, :index]
+    resources :course_sections, only: [:new, :create, :index] do
+      resources :feedbacks, except: [:index, :show, :destroy]
+    end
     post 'course_sections/register', to: 'course_sections#register', as: 'register'
   end
+  resources :feedbacks, only: [:index, :show, :destroy]
   resources :admins, only: [:edit, :show, :update]
   resources :user_constraints
   resources :application

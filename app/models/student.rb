@@ -5,7 +5,8 @@ class Student < ApplicationRecord
     has_one :credit_card, dependent: :destroy
     has_one :cart, dependent: :destroy
     has_many :purchase_histories
-    has_many :course_sections
+    has_many :course_sections, through: :purchase_histories
     has_many :feedbacks
     has_many :teachers , through: :course_sections
+    has_many :courses , through: :course_sections 
 end

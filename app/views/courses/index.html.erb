@@ -31,13 +31,22 @@
           <% if CourseSection.where(teacher_id: current_user.userable.id, course_id: course.id).any? %>
             <td>Registered</td>
           <% else %>
-            <td><%= link_to 'Create Course Section', course_register_path(course), method: :post %></td>
+            <td><%= button_to 'Register', course_register_path(course), method: :post %></td>
           <% end %>
         <% end %>
         <% if course.course_sections.any? %>
           <td><%= link_to 'View Course Sections', course_course_sections_path(course) %></td>
         <% else %>
           <td>No Course Sections</td>
+        <% end %>
+        <% if current_user.userable_type.to_s == "Student"%>
+          <% if current_user.userable.courses.where(id: course).any? %>
+              <% if Feedback.where(student_id: current_user.userable, course_section: current_user.userable.course_sections.find_by(course_id: course)).any? %>
+                <td><%= button_to 'Edit Feedback', edit_course_course_section_feedback_path(course, current_user.userable.course_sections.find_by(course_id: course), Feedback.find_by(student_id: current_user.userable, course_section: current_user.userable.course_sections.find_by(course_id: course))), method: :get %></td>
+              <% else %>
+                <td><%= button_to 'Create Feedback', new_course_course_section_feedback_path(course, current_user.userable.course_sections.find_by(course_id: course)), method: :get %></td>
+              <% end %>
+          <% end%>
         <% end %>
       </tr>
     <% end %>

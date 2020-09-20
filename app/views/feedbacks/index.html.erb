@@ -26,7 +26,7 @@
         <td><%= feedback.description %></td>
         <td><%= link_to 'Show', feedback %></td>
         <% if current_user.userable_type.to_str == "Student" %>
-          <td><%= link_to 'Edit', edit_feedback_path(feedback) %></td>
+          <td><%= link_to 'Edit', edit_course_course_section_feedback_path(feedback.course_section.course.id, feedback.course_section.id, feedback) %></td>
           <td><%= link_to 'Destroy', feedback, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
@@ -35,7 +35,4 @@
 </table>
 
 <br>
-<% if current_user.userable_type.to_str == "Student" %>
-  <%= link_to 'New Feedback', new_feedback_path %> |
-<% end %>
 <%= link_to 'Home', home_path %>

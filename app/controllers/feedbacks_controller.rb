@@ -1,7 +1,8 @@
 class FeedbacksController < ApplicationController
   before_action :set_feedback, only: [:show, :edit, :update, :destroy]
-  before_action :student?, only: [:new, :create, :edit, :update, :destroy]
-  before_action :authorized?, only: [:edit, :update, :destroy]
+  before_action :student?, only: [:new, :create]
+  before_action :feedback_show_access?, only: [:show]
+  before_action :feedback_edit_access?, only: [:edit, :update, :destroy]
 
   # GET /feedbacks
   # GET /feedbacks.json
@@ -22,6 +23,8 @@ class FeedbacksController < ApplicationController
 
   # GET /feedbacks/new
   def new
+    @course = Course.find(params[:course_id])
+    @course_section = CourseSection.find(params[:course_section_id])
     @feedback = Feedback.new
   end
 
@@ -32,7 +35,12 @@ class FeedbacksController < ApplicationController
   # POST /feedbacks
   # POST /feedbacks.json
   def create
+    @course = Course.find(params[:course_id])
+    @course_section = CourseSection.find(params[:course_section_id])
     @feedback = Feedback.new(feedback_params)
+    @feedback.course_section = @course_section
+    @feedback.student = current_user.userable
+    @feedback.teacher = @course_section.teacher
 
     respond_to do |format|
       if @feedback.save
@@ -73,6 +81,8 @@ class FeedbacksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_feedback
       @feedback = Feedback.find(params[:id])
+      @course = @feedback.course_section.course
+      @course_section = @feedback.course_section
     end
 
     # Only allow a list of trusted parameters through.
@@ -80,7 +90,7 @@ class FeedbacksController < ApplicationController
       params.require(:feedback).permit(:description)
     end
 
-    def authorized?
+    def feedback_edit_access?
       @student =  @feedback.student
       if current_user.userable_type.to_str == "Student"
         if current_user.userable != @student
@@ -90,6 +100,22 @@ class FeedbacksController < ApplicationController
       else
         flash[:notice] = "Page Restricted"
         redirect_to home_path
+      end
+    end
+
+    def feedback_show_access?
+      @teacher =  @feedback.teacher
+      @student =  @feedback.student
+      if current_user.userable_type.to_str == "Teacher"
+        if current_user.userable != @teacher
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
+      elsif current_user.userable_type.to_str == "Student"
+        if current_user.userable != @student
+          flash[:notice] = "Page Restricted"
+          redirect_to home_path
+        end
       end
     end
 end
