@@ -2,10 +2,10 @@
 
 <p id="notice" ><%= notice %></p>
 
-<p>This is a static student homepage for now. The links can be dependent on the student_id as to where it re-directs.</p>
+<br>
 
 <%= link_to "View Cart", student_carts_path(current_user.userable.id) %> |
-<%= link_to 'View Purchase History', purchase_history_path(current_user.userable.id) %> |
+<%= link_to 'View Purchase History', purchase_histories_path %> |
 <%= link_to "Courses", courses_path %> |
 <%= link_to "View feedbacks", feedbacks_path %> |
 <%= link_to "Edit Profile", edit_student_path(current_user.userable.id) %> |
