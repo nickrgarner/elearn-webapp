@@ -5,9 +5,9 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     if current_user.userable_type.to_str == "Teacher" || current_user.userable_type.to_str == "Student"
-      @courses = Course.where(discipline_id: current_user.userable.discipline_id)
+      @courses = Course.where(discipline_id: current_user.userable.discipline_id).reorder('course_number')
     else
-      @courses = Course.all
+      @courses = Course.all.reorder('discipline_id','course_number')
     end
   end
 

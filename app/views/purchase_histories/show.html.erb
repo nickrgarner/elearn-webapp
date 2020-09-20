@@ -17,11 +17,18 @@
   <tbody>
   <% @purchases.each do |purchase| %>
     <tr align="center">
-      <td><%= purchase.course_section.course.name %></td>
+      <td><%= purchase.course.name %></td>
       <td><%= purchase.course_section.id %></td>
       <td><%= (Teacher.find_by id: purchase.course_section.teacher_id).profile.name %></td>
       <td><%= purchase.price %></td>
       <td><%= purchase.created_at %></td>
+      <% if current_user.userable_type.to_str == "Student" %>
+        <% if Feedback.where(student_id: current_user.userable, course_section: purchase.course_section).any? %>
+          <td><%= button_to 'Edit Feedback', edit_course_course_section_feedback_path(purchase.course, purchase.course_section, Feedback.find_by(student_id: current_user.userable, course_section: purchase.course_section) ), method: :get %></td>
+        <% else %>
+          <td><%= button_to 'Create Feedback', new_course_course_section_feedback_path(purchase.course, purchase.course_section), method: :get %></td>
+        <% end %>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

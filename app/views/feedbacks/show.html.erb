@@ -23,7 +23,7 @@
 </p>
 
 <% if current_user.userable_type.to_str == "Student" %>
-  <%= link_to 'Edit', edit_feedback_path(@feedback) %> |
+  <%= link_to 'Edit', edit_course_course_section_feedback_path(@feedback.course_section.course.id, @feedback.course_section.id, @feedback) %> |
 <% end %>
 <%= link_to 'View Feedbacks', feedbacks_path %> |
 <%= link_to 'Home', home_path %>
