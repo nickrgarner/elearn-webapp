@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post 'carts/removefromcart', to: 'carts#remove_from_cart', as: 'cart_remove'
     post 'carts/checkout', to: 'carts#checkout', as: 'checkout'
   end
+  resources :carts, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   resources :purchase_histories, only: [:index]
   resources :disciplines

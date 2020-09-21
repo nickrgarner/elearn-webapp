@@ -13,9 +13,6 @@ class CourseSectionsController < ApplicationController
   def new
     @course = Course.find(params[:course_id])
     @course_section = @course.course_sections.build
-    if(current_user.userable_type.to_str == "Teacher")
-      @course_section.teacher_id = current_user.userable.id
-    end
   end
 
   # POST /course_sections
@@ -25,7 +22,7 @@ class CourseSectionsController < ApplicationController
     @course_section =  @course.course_sections.new(course_section_params)
     
     respond_to do |format|
-      if CourseSection.where(teacher_id: @course_section.teacher_id).any?
+      if CourseSection.where(teacher_id: @course_section.teacher_id, course_id: @course).any?
         format.html { render :new }
         flash[:notice] = "Course section for teacher already exists."
       elsif @course_section.save
@@ -47,7 +44,7 @@ class CourseSectionsController < ApplicationController
     
     respond_to do |format|
       if @course_section.save
-        format.html { redirect_to @course, notice: 'Course section was registerd created.' }
+        format.html { redirect_to @course, notice: 'Course section was successfully created.' }
         format.json { render :index, status: :created, location: @course }
       else
         format.html { redirect_to @course, notice: 'Course cannot be registerd .' }

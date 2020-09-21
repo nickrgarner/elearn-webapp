@@ -11,7 +11,7 @@ class TeachersController < ApplicationController
     if current_user.userable_type.to_str == "Student"
       @teachers = Teacher.where(discipline_id: current_user.userable.discipline_id)
     elsif current_user.userable_type.to_str == "Admin"
-      @teachers = Teacher.all
+      @teachers = Teacher.all.reorder('discipline_id')
     end
   end
 
