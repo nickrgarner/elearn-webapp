@@ -1,8 +1,11 @@
 class CartsController < ApplicationController
+  before_action :course_section_deleted?, only: [:new, :create, :add_to_cart, :remove_from_cart]
   before_action :set_cart, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :clear]
+  before_action :student_deleted?, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :clear]
   before_action :cart_access?, only: [:index, :add_to_cart, :remove_from_cart, :clear]
   before_action :admin?, only: [:new, :create]
   before_action :cart_checkout_access?, only: [:checkout]
+  before_action :transaction_safe?, only: [:checkout]
 
   # GET /carts
   # GET /carts.json
@@ -112,5 +115,39 @@ class CartsController < ApplicationController
         flash[:notice] = "Page Restricted"
         redirect_to home_path
       end
+    end
+
+    def course_section_deleted?
+      course_section =  CourseSection.find(params[:course_section_id])
+      if course_section.teacher.is_deleted == true || course_section.course.is_deleted == true
+        flash[:notice] = "Page not found."
+        redirect_to home_path
+      end
+    end
+
+    def student_deleted?
+      if @student.is_deleted == true
+        flash[:notice] = "Page not found."
+        redirect_to home_path
+      end
+    end
+
+    def transaction_safe?
+      safe = true
+      flash[:notice] = ""
+      @cart.cart_objects.each do |cart_object|
+        if cart_object.course.is_deleted
+          safe = false
+          cart_object.destroy 
+          flash[:notice] += "Course #{cart_object.course.name} was deleted."
+        elsif cart_object.course_section.teacher.is_deleted
+          safe = false
+          cart_object.destroy 
+          flash[:notice] += "Course Section for #{cart_object.course.name} was deleted."
+        end
+      end
+      if safe == false
+        redirect_to params[:link]    
+      end   
     end
 end

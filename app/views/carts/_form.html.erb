@@ -18,7 +18,7 @@
   <% if Student.where(discipline_id: @course_section.course.discipline_id).any? %>
     <div class="field">
       <%= label_tag :student_id %>
-      <%= select_tag "student_id", options_for_select(Student.where(discipline_id: @course_section.course.discipline_id).collect{ |s| [s.profile.name, s.id] }) %>
+      <%= select_tag "student_id", options_for_select(Student.where(discipline_id: @course_section.course.discipline_id, is_deleted: false).collect{ |s| [s.profile.name, s.id] }) %>
     </div>
 
     <div class="actions">

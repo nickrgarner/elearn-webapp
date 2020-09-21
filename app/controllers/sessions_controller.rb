@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
     skip_before_action :authorized, only: [:new, :create, :login]
+    before_action :deleted?, only: [:create]
 
     def new
     end
@@ -21,11 +22,21 @@ class SessionsController < ApplicationController
             flash.now[:alert] = "Email or password invalid"
             render "new"
         end
-    end
-  
+    end  
   
     def destroy
         session[:user_id] = nil
         redirect_to root_url, notice: "Logged Out"
     end
+
+    private
+      def deleted?
+        user = Profile.find_by_email(params[:email])
+        if user.userable_type.to_str == "Teacher" || user.userable_type.to_str == "Student"
+          if user.userable.is_deleted
+            flash.now[:alert] = "User deleted"
+            render "new"
+          end
+        end
+      end
 end
