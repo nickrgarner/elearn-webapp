@@ -7,7 +7,7 @@ class CourseSectionsController < ApplicationController
   # GET /course_sections
   # GET /course_sections.json
   def index
-    @course_sections = @course.course_sections.all
+    @course_sections = @course.course_sections.select {|cs| !cs.teacher.is_deleted }
   end
 
   # GET /course_sections/new

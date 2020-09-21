@@ -5,6 +5,7 @@ class CartsController < ApplicationController
   before_action :cart_access?, only: [:index, :add_to_cart, :remove_from_cart, :clear]
   before_action :admin?, only: [:new, :create]
   before_action :cart_checkout_access?, only: [:checkout]
+  before_action :transaction_safe?, only: [:checkout]
 
   # GET /carts
   # GET /carts.json
@@ -129,5 +130,24 @@ class CartsController < ApplicationController
         flash[:notice] = "Page not found."
         redirect_to home_path
       end
+    end
+
+    def transaction_safe?
+      safe = true
+      flash[:notice] = ""
+      @cart.cart_objects.each do |cart_object|
+        if cart_object.course.is_deleted
+          safe = false
+          cart_object.destroy 
+          flash[:notice] += "Course #{cart_object.course.name} was deleted."
+        elsif cart_object.course_section.teacher.is_deleted
+          safe = false
+          cart_object.destroy 
+          flash[:notice] += "Course Section for #{cart_object.course.name} was deleted."
+        end
+      end
+      if safe == false
+        redirect_to params[:link]    
+      end   
     end
 end

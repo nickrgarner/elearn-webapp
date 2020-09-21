@@ -20,7 +20,7 @@
   <% if Teacher.where(discipline_id: @course.discipline_id).any? %>
     <div class="field">
       <%= form.label :teacher_id %>
-      <%= form.select("teacher_id", Teacher.where(discipline_id: @course.discipline_id).collect{ |t| [t.profile.name, t.id] }) %>
+      <%= form.select("teacher_id", Teacher.where(discipline_id: @course.discipline_id, is_deleted: false).collect{ |t| [t.profile.name, t.id] }) %>
     </div>
 
     <div class="actions">
