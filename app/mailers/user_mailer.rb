@@ -6,4 +6,9 @@ class UserMailer < ApplicationMailer
       @url = 'https://hidden-meadow-75629.herokuapp.com/'
       mail(to: @user.email, subject: 'Welcome to E-Learn!')
   end 
+	def profile_updated_email
+      @user = params[:user]
+      @url = 'https://hidden-meadow-75629.herokuapp.com/'
+      mail(to: @user.email, subject: 'Profile Updated for E-Learn')
+  end 
 end

@@ -16,6 +16,7 @@ class AdminsController < ApplicationController
   def update
     respond_to do |format|
       if @admin.update(admin_params)
+        UserMailer.with(user: @admin.profile).profile_updated_email.deliver_now
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin }
       else

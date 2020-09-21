@@ -37,6 +37,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
+        UserMailer.with(user: @teacher.profile).signed_up_email.deliver_now
         format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
         format.json { render :show, status: :created, location: @teacher }
       else
@@ -51,6 +52,7 @@ class TeachersController < ApplicationController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
+        UserMailer.with(user: @teacher.profile).profile_updated_email.deliver_now
         format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
         format.json { render :show, status: :ok, location: @teacher }
       else
