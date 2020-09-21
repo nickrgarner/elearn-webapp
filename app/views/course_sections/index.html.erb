@@ -27,6 +27,8 @@
               <td><%= button_to 'Add to Cart', student_cart_add_path(current_user.userable), params: {course_section_id: course_section, link: course_course_sections_path(course_section.course)} %></td>
             <% end %>
           <% end %>
+        <% elsif current_user.userable_type.to_str == "Admin" %>
+          <td><%= button_to 'Purchase for student', new_cart_path, params: {course_section_id: course_section}, method: :get %></td>
         <% end %>
       </tr>
     <% end %>

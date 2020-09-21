@@ -7,6 +7,7 @@
   <tr>
     <th>Course Name</th>
     <th>Course Section</th>
+    <th>Teacher</th>
     <th>Price</th>
     <th colspan="3"></th>
   </tr>
@@ -17,23 +18,37 @@
     <tr>
       <td><%= cart_object.course_section.course.name %></td>
       <td><%= cart_object.course_section.id %></td>
+      <td><%= cart_object.course_section.teacher.profile.name %></td>
       <td><%= cart_object.course_section.course.price %></td>
-      <td><%= button_to 'Remove from Cart', student_cart_remove_path(current_user.userable.id), params: {course_section_id: cart_object.course_section, link: student_carts_path(current_user.userable)} %></td>
+      <td><%= button_to 'Remove from Cart', student_cart_remove_path(@student), params: {course_section_id: cart_object.course_section, link: student_carts_path(@student)} %></td>
     </tr>
   <% end %>
-  <% if CartObject.where(cart_id: current_user.userable.cart.id).any? == true && @current_user.userable.credit_card != nil%>
-    <td><b>Total:</b></td>
-    <td></td>
-    <td><%= @cart.total %></td>
+  <% if CartObject.where(cart_id: @student.cart.id).any? == true && @student.credit_card != nil %>
+    <tr>
+      <td><b>Total:</b></td>
+      <td></td>
+      <td><%= @cart.total %></td>
+    </tr>
   <% end %>
+  <tr>
+  <% if CartObject.where(cart_id: @student.cart.id).any? == true %>
+    <td><%= button_to 'Clear cart', student_cart_clear_path(@student), params: {course_section_id: 0, link: student_carts_path(@student)}, data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+  <% if CartObject.where(cart_id: @student.cart.id).any? == true && @student.credit_card != nil  && current_user.userable_type.to_s == "Student" %>
+    <td><%= button_to 'Checkout', student_checkout_path(@student), params: {course_section_id: 0, link: student_carts_path(@student)}, data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+  </tr>
   </tbody>
 </table>
 
-<% if CartObject.where(cart_id: current_user.userable.cart.id).any? == true && @current_user.userable.credit_card != nil%>
-  <%= button_to 'Checkout', student_checkout_path(current_user.userable), params: {course_section_id: 0, link: student_carts_path(current_user.userable)}, data: { confirm: 'Are you sure?' } %>
-<% end %>
+
 <br>
-<% if @current_user.userable.credit_card == nil%>
-  <%= link_to 'Add Credit Card', new_student_credit_card_path(@student) %> |
+<% if @student.credit_card == nil %>
+  <% if current_user.userable_type.to_s == "Student" %>
+    <%= link_to 'Add Credit Card', new_student_credit_card_path(@student) %> |
+  <% end %>
+<% end %>
+<% if current_user.userable_type.to_s == "Admin" %>
+  <%= link_to "Students", students_path %> |
 <% end %>
 <%= link_to 'Home', home_path %>

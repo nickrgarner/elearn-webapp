@@ -36,6 +36,10 @@
     <%= link_to 'Create Course Section', course_register_path(@course), method: :post %> |
   <% end %>
 <% end %>
-<%= link_to 'View Course Sections', course_course_sections_path(@course) %> |
+<% if @course.course_sections.any? %>
+  <%= link_to 'View Course Sections', course_course_sections_path(@course) %> |
+<% else %>
+No Course Sections exist |
+<% end %>
 <%= link_to 'View Courses', courses_path %> |
 <%= link_to 'Home', home_path %>
