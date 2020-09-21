@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:index, :add_to_cart, :remove_from_cart, :checkout]
-  before_action :cart_access?, only: [:index, :add_to_cart, :remove_from_cart]
+  before_action :set_cart, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :clear]
+  before_action :cart_access?, only: [:index, :add_to_cart, :remove_from_cart, :clear]
   before_action :admin?, only: [:new, :create]
   before_action :cart_checkout_access?, only: [:checkout]
 
@@ -67,6 +67,14 @@ class CartsController < ApplicationController
       cart_object.destroy
     end
     flash[:notice] = "Purchase successful."
+    redirect_to params[:link]
+  end
+
+  def clear
+    @cart.cart_objects.each do |cart_object|
+      cart_object.destroy
+    end
+    flash[:notice] = "Items removed."
     redirect_to params[:link]
   end
 
