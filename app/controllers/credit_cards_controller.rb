@@ -1,7 +1,8 @@
 class CreditCardsController < ApplicationController
   before_action :authorized?, only: [:new, :create]
   before_action :authorized_set_params?, only: [:index, :edit, :update, :destroy]
-
+  before_action :student_deleted?, only: [:new, :create, :index, :edit, :update, :destroy]
+  
   # GET /credit_cards
   # GET /credit_cards.json
   def index
@@ -97,6 +98,13 @@ class CreditCardsController < ApplicationController
         end
       else
         flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
+    end
+
+    def student_deleted?
+      if @student.is_deleted == true
+        flash[:notice] = "Page not found."
         redirect_to home_path
       end
     end

@@ -1,5 +1,7 @@
 class CartsController < ApplicationController
+  before_action :course_section_deleted?, only: [:new, :create, :add_to_cart, :remove_from_cart]
   before_action :set_cart, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :clear]
+  before_action :student_deleted?, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :clear]
   before_action :cart_access?, only: [:index, :add_to_cart, :remove_from_cart, :clear]
   before_action :admin?, only: [:new, :create]
   before_action :cart_checkout_access?, only: [:checkout]
@@ -110,6 +112,21 @@ class CartsController < ApplicationController
         end
       else
         flash[:notice] = "Page Restricted"
+        redirect_to home_path
+      end
+    end
+
+    def course_section_deleted?
+      course_section =  CourseSection.find(params[:course_section_id])
+      if course_section.teacher.is_deleted == true || course_section.course.is_deleted == true
+        flash[:notice] = "Page not found."
+        redirect_to home_path
+      end
+    end
+
+    def student_deleted?
+      if @student.is_deleted == true
+        flash[:notice] = "Page not found."
         redirect_to home_path
       end
     end
