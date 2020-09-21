@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :teacher_deleted?, only: [:show, :edit, :update, :destroy]
   before_action :teacher_edit_access?, only: [:edit, :update]
   before_action :teacher_show_access?, only: [:show]
   before_action :teacher_index_access?, only: [:index]
@@ -9,9 +10,9 @@ class TeachersController < ApplicationController
   # GET /teachers.json
   def index
     if current_user.userable_type.to_str == "Student"
-      @teachers = Teacher.where(discipline_id: current_user.userable.discipline_id)
+      @teachers = Teacher.where(discipline_id: current_user.userable.discipline_id, is_deleted: false)
     elsif current_user.userable_type.to_str == "Admin"
-      @teachers = Teacher.all.reorder('discipline_id')
+      @teachers = Teacher.all.where(is_deleted: false).reorder('discipline_id')
     end
   end
 
@@ -63,7 +64,7 @@ class TeachersController < ApplicationController
   # DELETE /teachers/1
   # DELETE /teachers/1.json
   def destroy
-    @teacher.destroy
+    @teacher.delete_teacher
     respond_to do |format|
       format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
       format.json { head :no_content }
@@ -84,11 +85,11 @@ class TeachersController < ApplicationController
     def teacher_edit_access?
       if current_user.userable_type.to_str == "Teacher"
         if current_user.userable != @teacher
-          flash[:notice] = "Page Restricted"
+          flash[:notice] = "Page Restricted."
           redirect_to home_path
         end
       elsif current_user.userable_type.to_str == "Student"
-        flash[:notice] = "Page Restricted"
+        flash[:notice] = "Page Restricted."
         redirect_to home_path
       end
     end
@@ -96,7 +97,7 @@ class TeachersController < ApplicationController
     def teacher_show_access?
       if current_user.userable_type.to_str == "Teacher"
         if current_user.userable != @teacher
-          flash[:notice] = "Page Restricted"
+          flash[:notice] = "Page Restricted."
           redirect_to home_path
         end
       end
@@ -104,7 +105,14 @@ class TeachersController < ApplicationController
 
     def teacher_index_access?
       if current_user.userable_type.to_str == "Teacher"
-        flash[:notice] = "Page Restricted"
+        flash[:notice] = "Page Restricted."
+        redirect_to home_path
+      end
+    end
+
+    def teacher_deleted?
+      if @teacher.is_deleted == true
+        flash[:notice] = "Page not found."
         redirect_to home_path
       end
     end

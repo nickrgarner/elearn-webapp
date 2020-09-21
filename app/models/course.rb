@@ -6,5 +6,9 @@ class Course < ApplicationRecord
     validates :name, presence: true
     validates :area, presence: true
     validates :price, numericality: {greater_than_or_equal_to: 0}
+
+    def delete_course
+      update(is_deleted: true)
+    end
   end
   

@@ -1,13 +1,15 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :admin?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :course_deleted?, only: [:show, :edit, :update, :destroy]
+
   # GET /courses
   # GET /courses.json
   def index
     if current_user.userable_type.to_str == "Teacher" || current_user.userable_type.to_str == "Student"
-      @courses = Course.where(discipline_id: current_user.userable.discipline_id).reorder('course_number')
+      @courses = Course.where(discipline_id: current_user.userable.discipline_id, is_deleted: false).reorder('course_number')
     else
-      @courses = Course.all.reorder('discipline_id','course_number')
+      @courses = Course.all.where(is_deleted: false).reorder('discipline_id','course_number')
     end
   end
 
@@ -58,7 +60,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
-    @course.destroy
+    @course.delete_course
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
@@ -74,5 +76,12 @@ class CoursesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def course_params
       params.require(:course).permit(:course_number, :discipline_id, :name, :area, :price)
+    end
+
+    def course_deleted?
+      if @course.is_deleted == true
+        flash[:notice] = "Page not found."
+        redirect_to home_path
+      end
     end
 end
