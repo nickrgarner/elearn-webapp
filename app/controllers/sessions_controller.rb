@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     end
   
     def create
-        user = Profile.find_by_email(params[:email])
+        user = Profile.where('lower(email) = ?', params[:email].downcase).first
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
             redirect_to home_path, notice: "Logged In"
@@ -31,8 +31,8 @@ class SessionsController < ApplicationController
 
     private
       def deleted?
-        user = Profile.find_by_email(params[:email])
-        if user.userable_type.to_str == "Teacher" || user.userable_type.to_str == "Student"
+        user = Profile.where('lower(email) = ?', params[:email].downcase).first
+        if user && (user.userable_type.to_str == "Teacher" || user.userable_type.to_str == "Student")
           if user.userable.is_deleted
             flash.now[:alert] = "User deleted"
             render "new"
