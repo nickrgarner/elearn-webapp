@@ -6,8 +6,10 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    if current_user.userable_type.to_str == "Teacher" || current_user.userable_type.to_str == "Student"
-      @courses = Course.where(discipline_id: current_user.userable.discipline_id, is_deleted: false).reorder('course_number')
+    if current_user.userable_type.to_str == "Teacher"
+      @courses = (Course.where(discipline_id: current_user.userable.discipline_id, is_deleted: false).reorder('course_number') + current_user.userable.courses.reorder('course_number')).uniq
+    elsif current_user.userable_type.to_str == "Student"
+      @courses = (Course.where(discipline_id: current_user.userable.discipline_id, is_deleted: false).reorder('course_number') + current_user.userable.courses.reorder('course_number')).uniq
     else
       @courses = Course.all.where(is_deleted: false).reorder('discipline_id','course_number')
     end

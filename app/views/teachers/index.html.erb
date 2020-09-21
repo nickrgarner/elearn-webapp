@@ -23,14 +23,31 @@
       <tr>
         <td><%= teacher.profile.first_name %></td>
         <td><%= teacher.profile.last_name %></td>
-        <td><%= teacher.profile.email %></td>
-        <td><%= teacher.profile.phone_number %></td>
-        <td><%= teacher.profile.address %></td>
-        <td><%= teacher.discipline.name %></td>
-        <% if current_user.userable_type.to_s == "Student" %>
-          <td><%= current_user.userable.course_sections.where(teacher_id: teacher).collect{ |cs| cs.course.name}.join(', ') %></td>
+
+        <% if current_user.userable_type.to_s != "Student" %>
+          <td><%= teacher.profile.email %></td>
+          <td><%= teacher.profile.phone_number %></td>
+          <td><%= teacher.profile.address %></td>
+          <td><%= teacher.discipline.name %></td>
+          <td><%= link_to 'Show', teacher %></td>
+        <% elsif current_user.userable_type.to_s == "Student" %>
+         <% if teacher.is_deleted == false %>
+            <td><%= teacher.profile.email %></td>
+            <td><%= teacher.profile.phone_number %></td>
+            <td><%= teacher.profile.address %></td>
+            <td><%= teacher.discipline.name %></td>
+            <td><%= current_user.userable.course_sections.where(teacher_id: teacher).collect{ |cs| cs.course.name}.join(', ') %></td>
+            <td><%= link_to 'Show', teacher %></td>
+          <% else %>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td><%= current_user.userable.course_sections.where(teacher_id: teacher).collect{ |cs| cs.course.name}.join(', ') %></td>
+            <td>Teacher deleted</td>
+          <% end %>
         <% end %>
-        <td><%= link_to 'Show', teacher %></td>
+
         <% if current_user.userable_type.to_s == "Admin"%>
           <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
           <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>

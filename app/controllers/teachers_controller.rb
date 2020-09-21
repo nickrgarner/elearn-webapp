@@ -10,7 +10,7 @@ class TeachersController < ApplicationController
   # GET /teachers.json
   def index
     if current_user.userable_type.to_str == "Student"
-      @teachers = Teacher.where(discipline_id: current_user.userable.discipline_id, is_deleted: false)
+      @teachers = (Teacher.where(discipline_id: current_user.userable.discipline_id, is_deleted: false) + current_user.userable.teachers).uniq
     elsif current_user.userable_type.to_str == "Admin"
       @teachers = Teacher.all.where(is_deleted: false).reorder('discipline_id')
     end
