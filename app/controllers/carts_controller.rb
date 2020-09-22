@@ -33,6 +33,8 @@ class CartsController < ApplicationController
 
   def checkout
     @cart.cart_objects.each do |cart_object|
+      UserMailer.with(user: @current_user,course: Course.find(cart_object.course_section.course_id)).registration_email.deliver_now
+      UserMailer.with(user: Teacher.find(cart_object.course_section.teacher_id),course: Course.find(cart_object.course_section.course_id)).new_student_email.deliver_now
       PurchaseHistory.create(student_id: current_user.userable.id, course_section_id: cart_object.course_section.id,
           price: cart_object.course_section.course.price)
       cart_object.destroy
