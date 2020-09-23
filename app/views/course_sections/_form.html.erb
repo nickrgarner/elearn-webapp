@@ -11,27 +11,22 @@
     </div>
   <% end %>
 
-<p>
-  <strong>Course</strong>
-  <br>
-  <%= @course.name %>
-</p>
+  <p>
+    <strong>Course</strong>
+    <br>
+    <%= @course.name %>
+  </p>
 
-<% if Teacher.where(discipline_id: @course.discipline_id).any? %>
-  <div class="field">
-    <%= form.label :teacher_id %>
-    <% if current_user.userable_type.to_str == "Admin" %> 
-      <%= form.select("teacher_id", Teacher.where(discipline_id: @course.discipline_id).collect{ |t| [ t.profile.name, t.id] }) %>
-    <% elsif current_user.userable_type.to_str == "Teacher" %>
-      <%= current_user.name %>
-    <% end %> 
-  </div>
+  <% if Teacher.where(discipline_id: @course.discipline_id).any? %>
+    <div class="field">
+      <%= form.label :teacher_id %>
+      <%= form.select("teacher_id", Teacher.where(discipline_id: @course.discipline_id, is_deleted: false).collect{ |t| [t.profile.name, t.id] }) %>
+    </div>
 
-  
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   <% else %>
-    No teacher exists
+    No teacher exists for this discipline.
   <% end %>
 <% end %>

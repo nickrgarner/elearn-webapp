@@ -9,4 +9,8 @@ class Student < ApplicationRecord
     has_many :feedbacks
     has_many :teachers , through: :course_sections
     has_many :courses , through: :course_sections 
+
+    def delete_student
+        update(is_deleted: true)
+      end
 end

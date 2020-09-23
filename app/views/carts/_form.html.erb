@@ -1,0 +1,30 @@
+<%= form_tag(controller: 'carts', action: 'create', method: :post) do %>
+  <p>
+    <strong>Course</strong>
+    <br>
+    <%= @course_section.course.name %>
+  </p>
+
+  <p>
+    <strong>Teacher</strong>
+    <br>
+    <%= @course_section.teacher.profile.name %>
+  </p>
+
+  <div class="field">
+    <%= hidden_field_tag :course_section_id, @course_section.id %>
+  </div>
+
+  <% if Student.where(discipline_id: @course_section.course.discipline_id).any? %>
+    <div class="field">
+      <%= label_tag :student_id %>
+      <%= select_tag "student_id", options_for_select(Student.where(discipline_id: @course_section.course.discipline_id, is_deleted: false).collect{ |s| [s.profile.name, s.id] }) %>
+    </div>
+
+    <div class="actions">
+      <%= submit_tag "Add to student Cart" %>
+    </div>
+  <% else %>
+    No student exists for this discipline.
+  <% end %>
+<% end %>

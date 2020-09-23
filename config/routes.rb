@@ -5,9 +5,11 @@ Rails.application.routes.draw do
     resources :carts, only: [:index]
     post 'carts/addtocart', to: 'carts#add_to_cart', as: 'cart_add'
     post 'carts/removefromcart', to: 'carts#remove_from_cart', as: 'cart_remove'
+    post 'carts/clear', to: 'carts#clear', as: 'cart_clear'
     post 'carts/checkout', to: 'carts#checkout', as: 'checkout'
     post 'carts/OTP', to: 'carts#OTP', as: 'OTP'
   end
+  resources :carts, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
   resources :purchase_histories, only: [:index]
   resources :disciplines
