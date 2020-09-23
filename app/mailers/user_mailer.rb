@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 	default from: 'e-learn@GGM.edu'
-	require 'securerandom'
+
 	def signed_up_email
       @user = params[:user]
       @url = 'https://hidden-meadow-75629.herokuapp.com/'
@@ -31,8 +31,8 @@ class UserMailer < ApplicationMailer
 
   	def OTP_email
   	  @user = params[:user]
-  	  @key = SecureRandom.hex(5)
+  	  @key = params[:key]
   	  @url = 'https://hidden-meadow-75629.herokuapp.com/'
-      mail(to: @user.email, subject: '')
+      mail(to: @user.email, subject: 'One Time Password For Checkout')
   end
 end

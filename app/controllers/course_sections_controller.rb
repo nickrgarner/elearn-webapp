@@ -1,6 +1,7 @@
 class CourseSectionsController < ApplicationController
   before_action :admin?, only: [:new, :create]
   before_action :teacher?, only: [:register]
+
  
   # GET /course_sections
   # GET /course_sections.json

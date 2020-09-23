@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
-  before_action :authorized?, only: [:index, :add_to_cart, :remove_from_cart, :checkout]
-  
+  before_action :authorized?, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :OTP]
+  require 'securerandom'
   # GET /carts
   # GET /carts.json
   def index
@@ -31,16 +31,27 @@ class CartsController < ApplicationController
     redirect_to params[:link]
   end
 
+  def OTP
+    @@key = SecureRandom.hex(5)
+    UserMailer.with(user: @current_user, key: @@key, course_section_id: 0, link: student_carts_path(current_user.userable)).OTP_email.deliver_now
+    flash[:alert] = "We've emailed you your One Time Password"
+  end
+
   def checkout
-    @cart.cart_objects.each do |cart_object|
-      UserMailer.with(user: @current_user,course: Course.find(cart_object.course_section.course_id)).registration_email.deliver_now
-      UserMailer.with(user: Teacher.find(cart_object.course_section.teacher_id),course: Course.find(cart_object.course_section.course_id)).new_student_email.deliver_now
-      PurchaseHistory.create(student_id: current_user.userable.id, course_section_id: cart_object.course_section.id,
-          price: cart_object.course_section.course.price)
-      cart_object.destroy
+    if @@key == params[:OTP]
+      @cart.cart_objects.each do |cart_object|
+        UserMailer.with(user: @current_user,course: Course.find(cart_object.course_section.course_id)).registration_email.deliver_now
+        UserMailer.with(user: Teacher.find(cart_object.course_section.teacher_id),course: Course.find(cart_object.course_section.course_id)).new_student_email.deliver_now
+        PurchaseHistory.create(student_id: current_user.userable.id, course_section_id: cart_object.course_section.id,
+            price: cart_object.course_section.course.price)
+        cart_object.destroy
+      end
+      flash[:notice] = "Purchase successful."
+      redirect_to student_carts_path(current_user.userable)
+    else
+      flash[:alert] = "Incorrect OTP, try again"
+      render "OTP"
     end
-    flash[:notice] = "Purchase successful."
-    redirect_to params[:link]
   end
 
   private

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     post 'carts/addtocart', to: 'carts#add_to_cart', as: 'cart_add'
     post 'carts/removefromcart', to: 'carts#remove_from_cart', as: 'cart_remove'
     post 'carts/checkout', to: 'carts#checkout', as: 'checkout'
+    post 'carts/OTP', to: 'carts#OTP', as: 'OTP'
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :purchase_histories, only: [:index]
