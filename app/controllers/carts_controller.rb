@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :authorized?, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :OTP]
+  before_action :authorized, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :OTP]
   before_action :course_section_deleted?, only: [:new, :create, :add_to_cart, :remove_from_cart]
   before_action :set_cart, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :clear]
   before_action :student_deleted?, only: [:index, :add_to_cart, :remove_from_cart, :checkout, :clear]
