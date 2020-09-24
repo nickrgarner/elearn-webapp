@@ -1,6 +1,6 @@
 # ELearning and Mentoring System - A Rails App
 
-## [Feedback Deployment v0.9.1](https://hidden-meadow-75629.herokuapp.com/)
+## [Final Submission Deployment v1.0](https://hidden-meadow-75629.herokuapp.com/)
 
 ## Test Login Information
 ### Admin
