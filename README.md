@@ -45,6 +45,8 @@ Feature|Path
 **Purchase History**|Student login -> View Purchase History
 **Create Feedbacks**|Student login -> View Purchase History -> Create/Edit Feedback
 **View Feedbacks**|Student/Teacher login -> View Feedbacks
+**View mentored Students**|Teacher login -> Students
+**View Teachers in Student's Discipline**|Student login -> Teachers
 **EC: User cannot access another account**|Student/Teacher login -> Change URL id param -> Redirected to Home
 **EC: One-Time Password**|Student login -> Courses -> View Course Sections -> Add to Cart -> Home -> View Cart -> Checkout
 **EC: Registration Welcome Email**|Login Page -> Sign Up -> Submit form OR Admin login -> Students/Teachers -> New Student/Teacher
@@ -54,5 +56,6 @@ Case|Handling
 ----|--------
 **Admin deletes course with registered students and/or teachers**|Course is internally marked as `isDeleted` and no longer appears in Course views, but purchases of that course remain in students' histories and feedbacks of that course remain accessible.
 **Admin deletes teacher registered for a course**|The course section will be removed and handled like the above.
-**Admin deletes a user**|The user is removed from the db but their email is preserved should they wish to sign up again. Their purchases, feedbacks, etc. are also preserved.
+**Admin deletes a user**|The user is removed from the db but their email address is preserved. Their purchases, feedbacks, etc. are also preserved.
 **Admin deletes course currently in a student's cart**|Student receives an error when attempting to checkout, and the invalid course is removed from their cart.
+**Courses cannot be dropped after Checkout**|This functionality was not listed in the project specs.
