@@ -96,5 +96,10 @@ RSpec.describe CoursesController do
       get :destroy, params: {id: @course.id}
       expect(response).to redirect_to(courses_path)
     end
+    it "should not be able to show a destroyed course" do
+      get :destroy, params: {id: @course.id}
+      get :show, params: {id: @course.id}
+      expect(response).to redirect_to(home_path)
+    end
   end
 end
