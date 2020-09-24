@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Course, type: :model do
   describe "Validations" do
     it "is valid with valid attributes" do
-      d1 = Discipline.create(name:"CSC")
+      d1 = Discipline.create(name:"Computer Science")
       c1 = Course.create(course_number: 510, name: "Software Engineering", discipline_id: d1.id, area:
           "Software Development", price: 555)
       expect(c1).to be_valid
