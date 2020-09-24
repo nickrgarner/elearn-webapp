@@ -59,3 +59,5 @@ Case|Handling
 **Admin deletes a user**|The user is removed from the db but their email address is preserved. Their purchases, feedbacks, etc. are also preserved.
 **Admin deletes course currently in a student's cart**|Student receives an error when attempting to checkout, and the invalid course is removed from their cart.
 **Courses cannot be dropped after Checkout**|This functionality was not listed in the project specs.
+
+### <br>Note: RSpec test files are located in [`/spec`](/spec) and can be run with command `rspec`
