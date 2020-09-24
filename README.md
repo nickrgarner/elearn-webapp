@@ -48,3 +48,10 @@ Feature|Path
 **EC: User cannot access another account**|Student/Teacher login -> Change URL id param -> Redirected to Home
 **EC: One-Time Password**|Student login -> Courses -> View Course Sections -> Add to Cart -> Home -> View Cart -> Checkout
 **EC: Registration Welcome Email**|Login Page -> Sign Up -> Submit form OR Admin login -> Students/Teachers -> New Student/Teacher
+
+## Edge Cases
+Case|Handling
+----|--------
+**Admin deletes course with registered students and/or teachers**|Course is internally marked as `isDeleted` and no longer appears in Course views, but purchases of that course remain in students' histories and feedbacks of that course remain accessible.
+**Admin deletes teacher registered for a course**|The course section will be removed and handled like the above.
+**Admin deletes a user**|The user is removed from the db but their email is preserved should they wish to sign up again. Their purchases, feedbacks, etc. are also preserved.
