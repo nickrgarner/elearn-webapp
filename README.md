@@ -55,3 +55,4 @@ Case|Handling
 **Admin deletes course with registered students and/or teachers**|Course is internally marked as `isDeleted` and no longer appears in Course views, but purchases of that course remain in students' histories and feedbacks of that course remain accessible.
 **Admin deletes teacher registered for a course**|The course section will be removed and handled like the above.
 **Admin deletes a user**|The user is removed from the db but their email is preserved should they wish to sign up again. Their purchases, feedbacks, etc. are also preserved.
+**Admin deletes course currently in a student's cart**|Student receives an error when attempting to checkout, and the invalid course is removed from their cart.
