@@ -45,7 +45,7 @@ class CourseSectionsController < ApplicationController
         format.html { redirect_to @course, notice: 'Course section was successfully created.' }
         format.json { render :index, status: :created, location: @course }
       else
-        format.html { redirect_to @course, notice: 'Course cannot be registerd .' }
+        format.html { redirect_to @course, notice: 'Course cannot be registered .' }
         format.json { render :index, status: :created, location: @course }
       end
     end

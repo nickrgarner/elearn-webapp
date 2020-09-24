@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Profile Updated for E-Learn!, <%= @user.first_name %></h1>
+    <p>
+      Your profile information for: <%= @user.email %> has been updated.<br>
+      If you did not make this change please contact Admin immediately. <br>
+    </p>
+    <p>
+      To login and see your changes, just follow this link: <%= @url %>.
+    </p>
+    <p>Have a great day!</p>
+  </body>
+</html>

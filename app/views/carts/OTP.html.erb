@@ -1,0 +1,13 @@
+<h1>Enter Your One Time Password</h1>
+
+<p id="alert"><%= alert %></p>
+
+<%= form_tag student_checkout_path(current_user.userable) do |form| %>
+  <div class="field">
+    <%= label_tag :OTP, "OTP:" %>
+    <%= text_field_tag :OTP %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Finish Checkout" %>
+  </div>
+<% end %>

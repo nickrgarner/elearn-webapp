@@ -34,13 +34,14 @@
   <% if CartObject.where(cart_id: @student.cart.id).any? == true %>
     <td><%= button_to 'Clear cart', student_cart_clear_path(@student), params: {course_section_id: 0, link: student_carts_path(@student)}, data: { confirm: 'Are you sure?' } %></td>
   <% end %>
-  <% if CartObject.where(cart_id: @student.cart.id).any? == true && @student.credit_card != nil  && current_user.userable_type.to_s == "Student" %>
-    <td><%= button_to 'Checkout', student_checkout_path(@student), params: {course_section_id: 0, link: student_carts_path(@student)}, data: { confirm: 'Are you sure?' } %></td>
+  <% if CartObject.where(cart_id: @student.cart.id).any? == true && @student.credit_card != nil%>
+    <% if current_user.userable_type.to_s == "Student"%>
+      <td><%= button_to 'Checkout', student_OTP_path(current_user.userable), params: {course_section_id: 0, link: student_carts_path(current_user.userable)}, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
   <% end %>
   </tr>
   </tbody>
 </table>
-
 
 <br>
 <% if @student.credit_card == nil %>

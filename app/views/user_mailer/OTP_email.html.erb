@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Here is your One Time Password, <%= @user.first_name %>:</h1>
+    <p>
+      Your One Time Password is:.<br>
+      <br>
+      <%= @key %>
+      <br>
+      <br>
+      Enter this password into the prompt on the screen to complete the checkout process.
+    </p>
+    <p>
+      This is a one time password that expires if you leave your current webpage.
+    </p>
+    <p>Have a great day!</p>
+  </body>
+</html>

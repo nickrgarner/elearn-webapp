@@ -42,6 +42,7 @@ class StudentsController < ApplicationController
     respond_to do |format|
       if @student.save
         puts @student.cart.save
+        UserMailer.with(user: @student.profile).signed_up_email.deliver_now
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
@@ -56,6 +57,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
+        UserMailer.with(user: @student.profile).profile_updated_email.deliver_now
         format.html { redirect_to @student, notice: 'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else
